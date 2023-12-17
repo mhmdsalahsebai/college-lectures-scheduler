@@ -4,18 +4,18 @@ import React, { useState } from "react";
 import Navbar2 from "@/components/Navbar2";
 import Image from "next/image";
 import Login from "@/components/LogIn";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function RootLayout({ children }) {
+  const { isAuthorized, loading } = useAuth();
+
+  console.log("isAuthorized", isAuthorized);
   return (
     <html lang="en">
       <body>
         <div className="flex flex-col h-screen">
           <Navbar2 />
-          <Login />
-          {/* <div className="flex-1 bg-cover" style={{ minHeight: 0 }}> */}
-          {/* <Image src="/Images/bg.jpg" alt="Background Image" layout="fill" objectFit="cover" /> */}
-
-          {/* </div> */}
+          {isAuthorized ? children : <Login />}
           <div
             className="mt-12"
             style={{

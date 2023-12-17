@@ -14,7 +14,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [status, setStatus] = useState(loginStatus.idle);
-  const { isAuthorized, loading } = useAuth();
 
   const handleLogin = async (event) => {
     event.target.submit.setAttribute("disabled", true);
@@ -35,40 +34,6 @@ const Login = () => {
       event.target.submit.setAttribute("disabled", false);
     }
   };
-
-  if (loading) {
-    return (
-      <div
-        style={{
-          color: "#fff",
-          fontSize: "48px",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        Loading ...
-      </div>
-    );
-  }
-
-  if (isAuthorized) {
-    return (
-      <div
-        style={{
-          color: "#fff",
-          fontSize: "48px",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        Welcome Admin!
-      </div>
-    );
-  }
 
   return (
     <div className="flex items-center justify-center h-screen">

@@ -11,7 +11,6 @@ export function useAuth() {
     });
 
     const data = await res.json();
-    console.log("isAuthorized", data.isAuthorized);
     setIsAuthorized(data.isAuthorized);
     setLoading(false);
   };
