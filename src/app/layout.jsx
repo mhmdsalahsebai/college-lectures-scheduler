@@ -1,47 +1,28 @@
 "use client"
 import '../styles/globals.css';
 import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import Sidebar from '@/components/Sidebar';
-import Hero from '@/components/Hero';
-
-// export const metadata: Metadata = {
-//   title: 'College Scheduler',
-//   description: 'Scheduler for College lectures',
-// };
+import Navbar2 from '@/components/Navbar2';
+import Image from 'next/image';
+import Login from '@/components/LogIn';
 
 export default function RootLayout({
   children,
 }) {
-  const [toggle, setToggle] = useState(false);
-
-  const handleToggle = () => {
-    setToggle((prev) => !prev);
-  };
 
   return (
     <html lang="en">
       <body>
-        <Navbar toggle={toggle} handleToggle={handleToggle} />
-        
-        <main className="w-screen">
-          <div className="h-full flex flex-row justify-start">
+        <div className="flex flex-col h-screen">
+          <Navbar2/>
+          <Login />
+          {/* <div className="flex-1 bg-cover" style={{ minHeight: 0 }}> */}
+            {/* <Image src="/Images/bg.jpg" alt="Background Image" layout="fill" objectFit="cover" /> */}
             
-            <Sidebar toggle={toggle} />
-            
-            <div className={'flex-1 p-2 bg-slate-200 text-white'}>
-              <Hero />
-              <div className='p-2 m-6 rounded-lg h-52'>
-
-              </div>
-              {children}
-            </div>
-          
+          {/* </div> */}
+          <div className='mt-12' style={{zIndex: -1, position: 'fixed', width: '100vw', height: '100vh'}}>
+          <Image src='/Images/bg.jpg' alt='Background' layout='fill' objectFit='cover' />
           </div>
-        </main>
-       
-        <Footer />
+        </div>
       </body>
     </html>
   );
