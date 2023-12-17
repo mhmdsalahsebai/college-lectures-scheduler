@@ -7,15 +7,19 @@ import Login from "@/components/LogIn";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function RootLayout({ children }) {
-  const { isAuthorized, loading } = useAuth();
-
-  console.log("isAuthorized", isAuthorized);
+  const { isAuthorized, loading, handleAuthorization } = useAuth();
   return (
     <html lang="en">
       <body>
         <div className="flex flex-col h-screen">
           <Navbar2 />
-          {isAuthorized ? children : <Login />}
+          {isAuthorized ? (
+            children
+          ) : !loading ? (
+            <Login handleAuthorization={handleAuthorization} />
+          ) : (
+            <h1>Loading ...</h1>
+          )}
           <div
             className="mt-12"
             style={{

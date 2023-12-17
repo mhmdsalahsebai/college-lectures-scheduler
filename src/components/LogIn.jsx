@@ -9,7 +9,7 @@ const loginStatus = {
   failed: 2,
 };
 
-const Login = () => {
+const Login = ({ handleAuthorization }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -27,10 +27,10 @@ const Login = () => {
 
     if (success) {
       setStatus(loginStatus.success);
-      router.push("/MainPage");
-      router.refresh();
+      handleAuthorization(true);
     } else {
       setStatus(loginStatus.error);
+      handleAuthorization(false);
       event.target.submit.setAttribute("disabled", false);
     }
   };
