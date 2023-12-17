@@ -5,13 +5,16 @@ export function useAuth() {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [loading, setLoading] = useState(true);
 
+  const handleAuthorization = (value) => {
+    setIsAuthorized(value);
+  };
+
   const checkIfUserAuthenticated = async () => {
     const res = await fetch("/api/verify", {
       method: "GET",
     });
 
     const data = await res.json();
-    console.log("isAuthorized", data.isAuthorized);
     setIsAuthorized(data.isAuthorized);
     setLoading(false);
   };
@@ -19,5 +22,5 @@ export function useAuth() {
     checkIfUserAuthenticated();
   }, []);
 
-  return { isAuthorized, loading };
+  return { isAuthorized, loading, handleAuthorization };
 }

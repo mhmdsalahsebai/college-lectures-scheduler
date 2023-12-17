@@ -9,12 +9,11 @@ const loginStatus = {
   failed: 2,
 };
 
-const Login = () => {
+const Login = ({ handleAuthorization }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
   const [status, setStatus] = useState(loginStatus.idle);
-  const { isAuthorized, loading } = useAuth();
 
   const handleLogin = async (event) => {
     event.target.submit.setAttribute("disabled", true);
@@ -28,47 +27,13 @@ const Login = () => {
 
     if (success) {
       setStatus(loginStatus.success);
-      router.push("/MainPage");
-      router.refresh();
+      handleAuthorization(true);
     } else {
       setStatus(loginStatus.error);
+      handleAuthorization(false);
       event.target.submit.setAttribute("disabled", false);
     }
   };
-
-  if (loading) {
-    return (
-      <div
-        style={{
-          color: "#fff",
-          fontSize: "48px",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        Loading ...
-      </div>
-    );
-  }
-
-  if (isAuthorized) {
-    return (
-      <div
-        style={{
-          color: "#fff",
-          fontSize: "48px",
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        Welcome Admin!
-      </div>
-    );
-  }
 
   return (
     <div className="flex items-center justify-center h-screen">
