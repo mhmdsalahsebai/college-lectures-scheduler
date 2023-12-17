@@ -39,6 +39,9 @@ export async function POST(request) {
         name: "token",
         value: token,
         path: "/",
+        secure: true,
+        httpOnly: true,
+        sameSite: "strict",
       });
       return response;
     } else {
