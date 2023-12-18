@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../hooks/useAuth";
 
+
 const loginStatus = {
   idle: 0,
   success: 1,
@@ -36,24 +37,32 @@ const Login = ({ handleAuthorization }) => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="w-96 p-8 bg-gray-100 rounded-md">
+    
+    <div className="flex items-center justify-center h-screen"> 
+      <div className="w-96 p-8 bg-white rounded-2xl">
         <div className="flex justify-center mb-4">
           <div className="mr-2">
             <Image
               src="/Images/university.png"
-              alt="Logo"
-              width={120}
-              height={120}
+              alt="Logo1"
+              width={150}
+              height={150}
             />
           </div>
           <div>
-            <Image src="/Images/eng.png" alt="Logo" width={120} height={120} />
+            <Image
+             src="/Images/eng.png"
+              alt="Logo2"
+               width={150} 
+               height={150} />
           </div>
         </div>
 
         <form onSubmit={handleLogin}>
           <div className="mb-4">
+            <h1
+            className="block text-center text-3xl	 font-medium text-gray-700"
+            >Login</h1>
             <label
               htmlFor="username"
               className="block text-sm font-medium text-gray-700"
@@ -66,7 +75,7 @@ const Login = ({ handleAuthorization }) => {
               placeholder="Enter username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+              className="mt-1 text-sm p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             />
           </div>
 
@@ -83,7 +92,7 @@ const Login = ({ handleAuthorization }) => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+              className="mt-1 p-2 w-full text-sm border rounded-md focus:outline-none focus:border-blue-500"
             />
           </div>
 
@@ -92,20 +101,20 @@ const Login = ({ handleAuthorization }) => {
               id="submit"
               type="submit"
               disabled={!username || !password}
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300 ml-auto mr-auto"
+              className="px-5 py-2 text-gray-700 rounded-md border border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-blue-600 focus:ring focus:border-blue-300 ml-auto mr-auto"
             >
               Login
             </button>
           </div>
 
           {status === loginStatus.error && (
-            <div className="text-center" style={{ color: "red" }}>
+            <div className="text-center text-sm" style={{ color: "red" }}>
               Login Failed, Wrong Username or Password
             </div>
           )}
 
           {status === loginStatus.success && (
-            <div className="text-center" style={{ color: "green" }}>
+            <div className="text-center text-sm" style={{ color: "green" }}>
               Login Success, Will redirect you soon!
             </div>
           )}
