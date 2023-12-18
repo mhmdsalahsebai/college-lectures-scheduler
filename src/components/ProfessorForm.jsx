@@ -85,7 +85,7 @@ const ProfessorForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-3/4 mx-auto px-2 py-6 bg-white shadow-md rounded-md">
+    <form onSubmit={handleSubmit} className="w-3/4 mx-auto px-6 py-6 bg-white shadow-md rounded-md">
       <div className="mb-4">
         <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
           Professor Name
@@ -165,7 +165,7 @@ const ProfessorForm = () => {
       </div>
 
       <button type="submit" className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300">
-        Submit
+        Add
       </button>
     </form>
   );

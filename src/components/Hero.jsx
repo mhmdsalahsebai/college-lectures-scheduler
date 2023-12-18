@@ -6,7 +6,6 @@ import { ClassNames } from '@emotion/react'
 const Hero = () => {
   return (
     <div className='p-2 m-6 rounded-lg h-80'>
-    {/* <Table /> */}
     <ModernTable />
     </div>
   )
