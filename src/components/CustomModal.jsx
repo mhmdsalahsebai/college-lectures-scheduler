@@ -1,23 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 const CustomModal = ({ isOpen, onClose, onSave }) => {
-  const [name, setName] = useState('');
-  const [subject, setSubject] = useState('');
-  const [type, setType] = useState('lecture');
+  const [name, setName] = useState("");
+  const [subject, setSubject] = useState("");
+  const [type, setType] = useState("lecture");
+  const [room, setRoom] = useState("");
 
   const handleSave = () => {
-    onSave({ name, subject, type });
+    onSave({ name, subject, type, room });
     onClose();
   };
 
   return (
-    <div className={`fixed inset-0 ${isOpen ? 'block' : 'hidden'} text-gray-900 bg-opacity-50 bg-gray-900`}>
+    <div
+      className={`fixed inset-0 ${
+        isOpen ? "block" : "hidden"
+      } text-gray-900 bg-opacity-50 bg-gray-900`}
+    >
       <div className="flex items-center justify-center h-screen">
         <div className="bg-white rounded-lg p-8 w-96">
           <div className="text-2xl font-bold mb-4">Add Event</div>
 
           <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="name"
+              className="block text-sm font-medium text-gray-700"
+            >
               Name:
             </label>
             <input
@@ -30,7 +38,10 @@ const CustomModal = ({ isOpen, onClose, onSave }) => {
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="subject" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="subject"
+              className="block text-sm font-medium text-gray-700"
+            >
               Subject:
             </label>
             <input
@@ -42,16 +53,33 @@ const CustomModal = ({ isOpen, onClose, onSave }) => {
               className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             />
           </div>
-          
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-700">Type:</label>
+            <label
+              htmlFor="room"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Room:
+            </label>
+            <input
+              id="room"
+              name="room"
+              type="text"
+              value={room}
+              onChange={(e) => setRoom(e.target.value)}
+              className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">
+              Type:
+            </label>
             <div>
               <label className="inline-flex items-center mr-4">
                 <input
                   type="radio"
                   value="lecture"
-                  checked={type === 'lecture'}
-                  onChange={() => setType('lecture')}
+                  checked={type === "lecture"}
+                  onChange={() => setType("lecture")}
                   className="form-radio h-4 w-4 text-blue-500"
                 />
                 <span className="ml-2 text-gray-700">Lecture</span>
@@ -60,8 +88,8 @@ const CustomModal = ({ isOpen, onClose, onSave }) => {
                 <input
                   type="radio"
                   value="section"
-                  checked={type === 'section'}
-                  onChange={() => setType('section')}
+                  checked={type === "section"}
+                  onChange={() => setType("section")}
                   className="form-radio h-4 w-4 text-blue-500"
                 />
                 <span className="ml-2 text-gray-700">Section</span>

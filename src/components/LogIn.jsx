@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../hooks/useAuth";
-
+import Link from "next/link";
 
 const loginStatus = {
   idle: 0,
@@ -37,32 +37,33 @@ const Login = ({ handleAuthorization }) => {
   };
 
   return (
-    
-    <div className="flex items-center justify-center h-screen"> 
+    <div className="flex items-center justify-center h-screen">
       <div className="w-96 p-8 bg-white rounded-2xl">
         <div className="flex justify-center mb-4">
           <div className="mr-2">
             <Image
-              src="/Images/university.png"
+              src="/Images/eng.png"
               alt="Logo1"
               width={150}
               height={150}
+              className="mt-1"
             />
           </div>
           <div>
             <Image
-             src="/Images/eng.png"
+              src="/Images/university.png"
               alt="Logo2"
-               width={150} 
-               height={150} />
+              width={150}
+              height={150}
+            />
           </div>
         </div>
 
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <h1
-            className="block text-center text-3xl	 font-medium text-gray-700"
-            >Login</h1>
+            <h1 className="block text-center text-3xl	 font-medium text-gray-700 cursor-default">
+              Login
+            </h1>
             <label
               htmlFor="username"
               className="block text-sm font-medium text-gray-700"
@@ -101,9 +102,10 @@ const Login = ({ handleAuthorization }) => {
               id="submit"
               type="submit"
               disabled={!username || !password}
-              className="px-5 py-2 text-gray-700 rounded-md border border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-blue-600 focus:ring focus:border-blue-300 ml-auto mr-auto"
+              className="px-5 py-2 text-gray-700 rounded-md border border-blue-600 hover:bg-blue-600 hover:text-white focus:outline-blue-600 focus:ring focus:border-blue-300 ml-auto mr-auto cursor-pointer"
             >
               Login
+              <Link href="./MainPage"></Link>
             </button>
           </div>
 
