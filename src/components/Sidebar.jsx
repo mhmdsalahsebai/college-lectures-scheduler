@@ -1,49 +1,86 @@
-import React from 'react';
-import classNames from 'classnames';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import BadgeOutlinedIcon from '@mui/icons-material/BadgeOutlined';
-import SettingsIcon from '@mui/icons-material/Settings';
-import Link from 'next/link';
+import React from "react";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
+import SettingsIcon from "@mui/icons-material/Settings";
+import ExitToAppIcon from "@mui/icons-material/ExitToApp"; // Import the ExitToAppIcon
+import Link from "next/link";
 
-
-const Sidebar = ({ toggle }) => {
-  const wrapperClasses = classNames(
-    "group w-12 py-12 bg-gray-800 flex flex-col gap-4 items-center justify-start transition-all duration-500 hover:w-48",
-
-  );
-  const boxClasses = 'mb-6 text-md font-semibold text-white p-2 bg-gray-800 rounded-md transition-transform hover:font-bold hover:scale-95 cursor-pointer';
-  const iconClasses = 'hover:font-bold hover:scale-95 cursor-pointer';
-  const buttonClasses = classNames('bg-white mb-6 text-gray-800 font-semibold rounded-md p-2', { 'mt-5 p-2': toggle, })
+const Sidebar = ({ setLogoutMessage }) => {
+  const handleLogout = async () => {
+    try {
+      const response = await fetch("/api/logout", {
+        method: "POST",
+      });
+      if (response.ok) {
+        setLogoutMessage("Logout successful!");
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+      } else {
+        console.error("Logout failed:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  };
   return (
-    <div className={wrapperClasses}>
-      <Link href="/">
-        <div className='group flex flex-row text-center justify-center cursor-pointer mb-4 text-white' >
-          <span className='mr-4'><CalendarMonthIcon fontSize="small" /></span>
-          <span className="hidden transition-all duration-500 group-hover:inline-block">Calendar</span>
-        </div>
-      </Link>
+    <div className="group relative w-16 px-2 py-4 bg-gray-800 flex flex-col gap-6 items-center transition-all duration-200 hover:w-40 hover:justify-start">
+      <div className="flex items-center rounded-lg text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 group-hover:p-2 group-hover:w-full">
+        <span className="mr-2">
+          <CalendarMonthIcon style={{ fontSize: 24 }} />
+        </span>
+        <Link href="/">
+          <span className="hidden group-hover:inline-block transition-all duration-1000">
+            Calendar
+          </span>
+        </Link>
+      </div>
 
-      <Link href="/">
-        <div className='group flex flex-row text-center justify-center cursor-pointer mb-4 text-white' >
-          <span className='mr-4'><BadgeOutlinedIcon fontSize="small" /></span>
-          <span className="hidden transition-all duration-500 group-hover:inline-block">Instructors</span>
-        </div>
-      </Link>
+      <div className="flex items-center rounded-lg text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 group-hover:p-2 group-hover:w-full">
+        <span className="mr-2">
+          <BadgeOutlinedIcon style={{ fontSize: 24 }} />
+        </span>
+        <Link href="/">
+          <span className="hidden group-hover:inline-block transition-all duration-1000">
+            Instructors
+          </span>
+        </Link>
+      </div>
 
-      <Link href="/">
-        <div className='group flex flex-row text-center justify-center cursor-pointer mb-4 text-white' >
-          <span className='mr-4'><AccountCircleIcon fontSize="small" /></span>
-          <span className="hidden transition-all duration-500 group-hover:inline-block">Admin</span>
-        </div>
-      </Link>
+      <div className="flex items-center rounded-lg text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 group-hover:p-2 group-hover:w-full">
+        <span className="mr-2">
+          <AccountCircleIcon style={{ fontSize: 24 }} />
+        </span>
+        <Link href="/Admin">
+          <span className="hidden group-hover:inline-block transition-all duration-1000">
+            Admin
+          </span>
+        </Link>
+      </div>
 
-      <Link href="/">
-        <div className='group flex flex-row text-center justify-center cursor-pointer mb-4 text-white' >
-          <span className='mr-4'><SettingsIcon fontSize="small" /></span>
-          <span className="hidden transition-all duration-500 group-hover:inline-block">Settings</span>
-        </div>
-      </Link>
+      <div className="flex items-center rounded-lg text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 group-hover:p-2 group-hover:w-full">
+        <span className="mr-2">
+          <SettingsIcon style={{ fontSize: 24 }} />
+        </span>
+        <Link href="/">
+          <span className="hidden group-hover:inline-block transition-all duration-1000">
+            Settings
+          </span>
+        </Link>
+      </div>
+
+      <div
+        onClick={handleLogout}
+        className="flex items-center rounded-lg text-white cursor-pointer hover:scale-105 group-hover:bg-red-500 group-hover:p-2 group-hover:w-full"
+      >
+        <span className="mr-2">
+          <ExitToAppIcon style={{ fontSize: 24 }} />
+        </span>
+        <button className="hidden group-hover:inline-block transition-all duration-1000 focus:outline-none">
+          Logout
+        </button>
+      </div>
     </div>
   );
 };

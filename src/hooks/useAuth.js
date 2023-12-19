@@ -13,8 +13,8 @@ export function useAuth() {
     const res = await fetch("/api/verify", {
       method: "GET",
     });
-
     const data = await res.json();
+    
     setIsAuthorized(data.isAuthorized);
     setLoading(false);
   };
