@@ -34,7 +34,7 @@ export default function RootLayout({ children }) {
             </>
           ) : (
             <>
-              <h1 className="flex text-2xl font-medium text-center text-white justify-center">
+              <h1 className="flex text-2xl font-medium items-center text-white justify-center h-screen">
                 Loading ...
               </h1>
             </>

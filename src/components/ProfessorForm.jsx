@@ -4,11 +4,11 @@ import Select from "react-select";
 const ProfessorForm = () => {
   const [professorInfo, setProfessorInfo] = useState({
     name: "",
+    email: "",
     course: [],
     courseCode: [],
     availability: [],
     phoneNumber: "",
-    email: "",
     room: "",
   });
 
@@ -77,10 +77,26 @@ const ProfessorForm = () => {
     setProfessorInfo({ ...professorInfo, [name]: sanitizedValue });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission (e.g., send data to the server)
-    console.log("Professor Info:", professorInfo);
+
+    try {
+      const response = await fetch('/api/save_professor', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(professorInfo),
+      });
+
+      if (response.ok) {
+        console.log('Data sent successfully');
+      } else {
+        console.error('Failed to send data');
+      }
+    } catch (error) {
+      console.error('Error sending data:', error);
+    }
   };
 
   return (

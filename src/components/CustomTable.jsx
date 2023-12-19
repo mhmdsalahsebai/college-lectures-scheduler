@@ -1,10 +1,34 @@
-import React, { useState } from "react";
+"use client";
+import React, { useState, useEffect } from "react";
 import CustomModal from "./CustomModal";
 
 const CustomTable = () => {
+  const [tableData, setTableData] = useState([[]]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('api/saveData', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        const result = await response.json();
+        if (result.data !== undefined) {
+          setTableData(result.data);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+    console.log('tableData', tableData);
+  }, []);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ row: 0, col: 0 });
-  const [tableData, setTableData] = useState([[]]);
+
   const days = [
     "Saturday",
     "Sunday",
@@ -46,10 +70,30 @@ const CustomTable = () => {
     };
     setTableData(updatedData);
     setIsModalOpen(false);
+    handleSaveTable(updatedData);
+  };
+  const handleSaveTable = async (updatedData) => {
+    try {
+      const response = await fetch('api/saveData', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updatedData),
+      });
+      if (response.ok) {
+        console.log('Data saved successfully');
+      } else {
+        console.error('Error saving data');
+      }
+    } catch (error) {
+      console.error('Error saving :', error);
+    }
   };
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="container mx-auto mt-8"   >
+
       <table className="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
         <thead className="bg-gray-800 text-white">
           <tr>
@@ -87,28 +131,25 @@ const CustomTable = () => {
               {days.map((_, colIndex) => (
                 <td
                   key={colIndex}
-                  className={`py-2 px-4 cursor-pointer border border-gray-300 text-center ${
-                    colIndex === 3 && rowIndex === 2 ? "bg-gray-700" : ""
-                  } ${
-                    tableData[rowIndex] &&
-                    tableData[rowIndex][colIndex] &&
-                    tableData[rowIndex][colIndex].type === "lecture"
+                  className={`py-2 px-4 cursor-pointer border border-gray-300 text-center ${colIndex === 3 && rowIndex === 2 ? "bg-gray-700" : ""
+                    } ${tableData[rowIndex] &&
+                      tableData[rowIndex][colIndex] &&
+                      tableData[rowIndex][colIndex].type === "lecture"
                       ? "bg-green-200"
                       : tableData[rowIndex] &&
                         tableData[rowIndex][colIndex] &&
                         tableData[rowIndex][colIndex].type === "section"
-                      ? "bg-blue-200"
-                      : ""
-                  }`}
+                        ? "bg-blue-200"
+                        : ""
+                    }`}
                   onClick={() => handleCellClick(rowIndex, colIndex)}
                 >
                   {tableData[rowIndex] && tableData[rowIndex][colIndex] && (
                     <span
-                      className={`${
-                        tableData[rowIndex][colIndex].type === "lecture"
-                          ? "bg-light-green-200"
-                          : "bg-light-blue-200"
-                      }`}
+                      className={`${tableData[rowIndex][colIndex].type === "lecture"
+                        ? "bg-light-green-200"
+                        : "bg-light-blue-200"
+                        }`}
                     >
                       {tableData[rowIndex][colIndex].subject} <br></br>{" "}
                       {tableData[rowIndex][colIndex].name} <br></br>{" "}

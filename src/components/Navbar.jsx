@@ -6,7 +6,7 @@ const Navbar = () => {
   return (
     <nav className="bg-white">
       <div className="flex items-center justify-between px-3 py-2">
-        <Link href="https://www.google.com">
+        <Link href="/">
           <Image src="/Images/eng.png" alt="logo" width={170} height={170} />
         </Link>
         <div className="flexEnd w-30 px-2 rounded-all rounded-lg bg-white text-gray-900 cursor-pointer">

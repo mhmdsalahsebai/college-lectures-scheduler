@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Select from "react-select";
 
-const SectionForm = ({ onSubmit }) => {
+const SectionForm = () => {
   const [sectionInfo, setSectionInfo] = useState({
     engineerName: "",
     email: "",
-    phoneNumber: "",
-    availability: [],
     course: [],
     courseCode: [],
+    availability: [],
+    phoneNumber: "",
   });
 
   const daysOptions = [
@@ -63,8 +63,9 @@ const SectionForm = ({ onSubmit }) => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Enforce only numbers and the "+" sign
-    const sanitizedValue = value.replace(/[^0-9+]/g, "");
+    // Enforce only numbers and the "+" sign for phone number
+    const sanitizedValue =
+      name === "phoneNumber" ? value.replace(/[^0-9+]/g, "") : value;
     setSectionInfo({ ...sectionInfo, [name]: sanitizedValue });
   };
 
@@ -75,12 +76,28 @@ const SectionForm = ({ onSubmit }) => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(sectionInfo);
-  };
 
-  return (
+    try {
+      const response = await fetch('/api/save_engineer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(sectionInfo),
+      });
+
+      if (response.ok) {
+        console.log('Data sent successfully');
+      } else {
+        console.error('Failed to send data');
+      }
+    } catch (error) {
+      console.error('Error sending data:', error);
+    }
+  };
+  return(
     <form
       onSubmit={handleSubmit}
       className="w-3/4 mx-auto px-6 py-6 bg-white shadow-md rounded-md"
