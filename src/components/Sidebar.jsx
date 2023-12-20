@@ -87,7 +87,7 @@ const Sidebar = ({ setLogoutMessage }) => {
         </div>
         <div></div>
         <div
-          className="flex justify-self-end rounded-lg transition-all duration-300 text-white group-hover:bg-red-500 cursor-pointer hover:scale-105 group-hover:p-2 w-full"
+          className="flex justify-self-end rounded-lg transition-all duration-300 text-white group-hover:bg-red-500 cursor-pointer hover:scale-105 p-2 w-full"
           onClick={handleLogout}
         >
           <span className="mr-2">

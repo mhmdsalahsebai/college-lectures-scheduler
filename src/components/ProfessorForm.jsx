@@ -79,7 +79,7 @@ const ProfessorForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(professorInfo);
     try {
       const response = await fetch('/api/save_professor', {
         method: 'POST',

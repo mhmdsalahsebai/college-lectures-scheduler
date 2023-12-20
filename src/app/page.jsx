@@ -22,7 +22,7 @@ export default function Page() {
     }
   };
   return (
-    <div className="fixed h-full w-full">
+    <div className="h-full w-full">
       {isAuthorized ? (
         <>
           <Navbar />
@@ -45,23 +45,29 @@ export default function Page() {
             handleLogin={handleLogin}
             handleAuthorization={handleAuthorization}
           />
+          <div
+            className="fixed top-0 left-0 w-full h-full bg-cover bg-center"
+            style={{
+              backgroundImage: "url('/Images/bg.jpg')",
+              zIndex: -1,
+            }}
+          ></div>
         </>
       ) : (
+        <>
+        <NavbarLogin />
         <h1 className="flex text-2xl font-medium items-center text-white justify-center h-screen">
           Loading ...
         </h1>
+        <div
+            className="fixed top-0 left-0 w-full h-full bg-cover bg-center"
+            style={{
+              backgroundImage: "url('/Images/bg.jpg')",
+              zIndex: -1,
+            }}
+          ></div>
+      </>
       )}
-      <div
-        className="mt-12"
-        style={{
-          zIndex: -1,
-          position: "fixed",
-          width: "100vw",
-          height: "100vh",
-        }}
-      >
-        <Image src="/Images/bg.jpg" layout="fill" objectFit="cover" />
-      </div>
     </div>
   );
 }
