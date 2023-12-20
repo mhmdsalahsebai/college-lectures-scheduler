@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Dropdown from './Dropdown';
 import Staff from './staff';
 
-const CustomModal = ({ isOpen, onClose, onSave }) => {
+const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [type, setType] = useState("lecture");
@@ -10,6 +10,11 @@ const CustomModal = ({ isOpen, onClose, onSave }) => {
 
   const handleSave = () => {
     onSave({ name, subject, type, room });
+    onClose();
+  };
+
+  const handleRemove = () => {
+    onRemove();
     onClose();
   };
 
@@ -31,8 +36,6 @@ const CustomModal = ({ isOpen, onClose, onSave }) => {
               Name:
             </label>
             <Staff />
-
-      
           </div>
           <div className="mb-4">
             <label
@@ -41,10 +44,7 @@ const CustomModal = ({ isOpen, onClose, onSave }) => {
             >
               Subject:
             </label>
-          
-      <Dropdown />
-   
-           
+            <Dropdown />
           </div>
           <div className="mb-4">
             <label
@@ -89,19 +89,29 @@ const CustomModal = ({ isOpen, onClose, onSave }) => {
               </label>
             </div>
           </div>
-          <div className="flex justify-end">
-            <button
-              className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-              onClick={handleSave}
-            >
-              Save
-            </button>
-            <button
-              className="ml-2 px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:border-gray-300"
-              onClick={onClose}
-            >
-              Cancel
-            </button>
+          <div className="flex justify-between">
+            <div className="flex p-1 space-x-2">
+              <button
+                className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+              <button
+                className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:border-gray-300"
+                onClick={onClose}
+              >
+                Cancel
+              </button>
+            </div>
+            {onRemove && (
+              <button
+                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300"
+                onClick={handleRemove}
+              >
+                Remove
+              </button>
+            )}
           </div>
         </div>
       </div>
