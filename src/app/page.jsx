@@ -26,7 +26,7 @@ export default function Page() {
       {isAuthorized ? (
         <>
           <Navbar />
-          <div className="h-screen flex flex-row justify-start">
+          <main className="overflow-y-auto h-[92vh] flex-1 flex flex-row md:flex-row sm:flex-row">
             <Sidebar setLogoutMessage={setLogoutMessage} />
             <div className="flex-1 p-2 text-white">
               <CustomTable />
@@ -36,7 +36,7 @@ export default function Page() {
                 </div>
               )}
             </div>
-          </div>
+          </main>
         </>
       ) : !loading ? (
         <>

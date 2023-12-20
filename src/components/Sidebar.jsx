@@ -24,72 +24,79 @@ const Sidebar = ({ setLogoutMessage }) => {
       console.error("Logout failed:", error);
     }
   };
+  const sidebarItems = [
+    {
+      icon: <CalendarMonthIcon style={{ fontSize: 24 }} />,
+      link: "/",
+      label: "Calendar",
+    },
+    {
+      icon: <BadgeOutlinedIcon style={{ fontSize: 24 }} />,
+      link: "/Professors",
+      label: "Professors",
+    },
+    {
+      icon: <BadgeOutlinedIcon style={{ fontSize: 24 }} />,
+      link: "/Engineers",
+      label: "Engineers",
+    },
+    {
+      icon: <AccountCircleIcon style={{ fontSize: 24 }} />,
+      link: "/Admin",
+      label: "Admin",
+    },
+    {
+      icon: <SettingsIcon style={{ fontSize: 24 }} />,
+      link: "/Settings",
+      label: "Settings",
+    },
+    {
+      icon: <ExitToAppIcon style={{ fontSize: 24 }} />,
+      handleClick: handleLogout,
+      label: "Logout",
+    },
+  ];
+
   return (
-    <div className="group relative w-16 px-2 py-4 bg-gray-800 flex flex-col gap-6 items-center transition-all duration-200 hover:w-40 hover:justify-start">
-      <div className="flex items-center rounded-lg text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 group-hover:p-2 group-hover:w-full">
-        <span className="mr-2">
-          <CalendarMonthIcon style={{ fontSize: 24 }} />
-        </span>
-        <Link href="/">
-          <span className="hidden group-hover:inline-block transition-all duration-1000">
-            Calendar
+    <div
+      id="side"
+      className="group relative w-16 px-2 py-4 bg-gray-800 flex flex-col items-center transition-all duration-200 hover:w-40"
+    >
+      <div className="flex flex-col justify-between h-full">
+        <div className="flex flex-col gap-2">
+          {sidebarItems.slice(0, -1).map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center rounded-lg transition-all p-2 duration-300 text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 w-full"
+              onClick={item.handleClick || (() => {})}
+            >
+              <span className="mr-2">{item.icon}</span>
+              {item.link ? (
+                <Link href={item.link}>
+                  <span className="hidden group-hover:inline-block">
+                    {item.label}
+                  </span>
+                </Link>
+              ) : (
+                <button className="hidden group-hover:inline-block focus:outline-none">
+                  {item.label}
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+        <div></div>
+        <div
+          className="flex justify-self-end rounded-lg transition-all duration-300 text-white group-hover:bg-red-500 cursor-pointer hover:scale-105 group-hover:p-2 w-full"
+          onClick={handleLogout}
+        >
+          <span className="mr-2">
+            <ExitToAppIcon style={{ fontSize: 24 }} />
           </span>
-        </Link>
-      </div>
-
-      <div className="flex items-center rounded-lg text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 group-hover:p-2 group-hover:w-full">
-        <span className="mr-2">
-          <BadgeOutlinedIcon style={{ fontSize: 24 }} />
-        </span>
-        <Link href="/Professors">
-          <span className="hidden group-hover:inline-block transition-all duration-1000">
-            Professorss
-          </span>
-        </Link>
-      </div>
-      <div className="flex items-center rounded-lg text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 group-hover:p-2 group-hover:w-full">
-        <span className="mr-2">
-          <BadgeOutlinedIcon style={{ fontSize: 24 }} />
-        </span>
-        <Link href="/Engineers">
-          <span className="hidden group-hover:inline-block transition-all duration-1000">
-          Engineers
-          </span>
-        </Link>
-      </div>
-
-      <div className="flex items-center rounded-lg text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 group-hover:p-2 group-hover:w-full">
-        <span className="mr-2">
-          <AccountCircleIcon style={{ fontSize: 24 }} />
-        </span>
-        <Link href="/Admin">
-          <span className="hidden group-hover:inline-block transition-all duration-1000">
-            Admin
-          </span>
-        </Link>
-      </div>
-
-      <div className="flex items-center rounded-lg text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 group-hover:p-2 group-hover:w-full">
-        <span className="mr-2">
-          <SettingsIcon style={{ fontSize: 24 }} />
-        </span>
-        <Link href="/">
-          <span className="hidden group-hover:inline-block transition-all duration-1000">
-            Settings
-          </span>
-        </Link>
-      </div>
-
-      <div
-        onClick={handleLogout}
-        className="flex items-center rounded-lg text-white cursor-pointer hover:scale-105 group-hover:bg-red-500 group-hover:p-2 group-hover:w-full"
-      >
-        <span className="mr-2">
-          <ExitToAppIcon style={{ fontSize: 24 }} />
-        </span>
-        <button className="hidden group-hover:inline-block transition-all duration-1000 focus:outline-none">
-          Logout
-        </button>
+          <button className="hidden group-hover:inline-block focus:outline-none">
+            Logout
+          </button>
+        </div>
       </div>
     </div>
   );
