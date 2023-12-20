@@ -6,7 +6,8 @@ export async function POST(request) {
     const jsonData = await request.json();
     const { name } = jsonData;
     const filePath = path.join(process.cwd(), "data/professors", name +".json");
-
+    
+    console.log(jsonData);
     try {   
         fs.writeFileSync(filePath, JSON.stringify(jsonData));
         return NextResponse.json(

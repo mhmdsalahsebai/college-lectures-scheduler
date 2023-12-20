@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-const CustomTable = (prams) => {
+const InstructionTable = (prams) => {
   const [tableData, setTableData] = useState([[]]);
 
   useEffect(() => {
@@ -36,9 +36,9 @@ const CustomTable = (prams) => {
 
 
   return (
-    <div className="container fixed px-4 mx-auto mt-8"   >
+    <div className="container fixed px-4 mt-8"   >
 
-      <table className=" w-11/12  bg-white border border-gray-300 rounded-lg overflow-hidden">
+      <table className="w-full bg-white border m-auto border-gray-300 rounded-lg overflow-hidden">
         <thead className="bg-gray-800 text-white">
           <tr>
             {head_table.map((name, index) => (
@@ -79,4 +79,4 @@ const CustomTable = (prams) => {
   );
 };
 
-export default CustomTable;
+export default InstructionTable;
