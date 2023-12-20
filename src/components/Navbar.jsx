@@ -17,7 +17,7 @@ const Navbar = () => {
             width={30}
             height={30}
           />
-          <div>
+          <div className="hidden md:inline-block">
             <p className="font-bold">Hello</p>
             <p className="text-sm">Administrator</p>
           </div>

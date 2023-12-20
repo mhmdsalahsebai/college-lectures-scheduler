@@ -29,12 +29,6 @@ if (typeof Node === 'function' && Node.prototype) {
   };
 }
 
-
-
-
-
-
-
 import "../../styles/globals.css";
 import React from "react";
 import ProfessorForm from "@/components/ProfessorForm";
@@ -43,7 +37,7 @@ import SectionForm from "@/components/SectionForm";
 export default function PageComponent() {
   return (
     <main className="flex-1 p-10">
-            <div key='uniqueKey'>
+      <div key='uniqueKey'>
       <h1 className="text-3xl font-bold mb-6">Professor Information</h1>
 
 
