@@ -23,7 +23,6 @@ const CustomTable = (prams) => {
       }
     };
     fetchData();
-    console.log('tableData', tableData);
   }, []);
 
   const head_table = [

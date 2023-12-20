@@ -22,6 +22,7 @@ export async function POST(request) {
 export async function GET() {
     const filePath = path.join(process.cwd(), "data/engineers");
     const fileNames = fs.readdirSync(filePath);
+
     const data = fileNames.map((fileName) => {
         const fileContent = fs.readFileSync(path.join(filePath, fileName), "utf8");
         return JSON.parse(fileContent);
