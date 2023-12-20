@@ -89,7 +89,7 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
               </label>
             </div>
           </div>
-          <div className="flex justify-between">
+          <div className="flex justify-between items-center">
             <div className="flex p-1 space-x-2">
               <button
                 className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
@@ -104,6 +104,7 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
                 Cancel
               </button>
             </div>
+            <div> 
             {onRemove && (
               <button
                 className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300"
@@ -112,6 +113,7 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
                 Remove
               </button>
             )}
+            </div>
           </div>
         </div>
       </div>
