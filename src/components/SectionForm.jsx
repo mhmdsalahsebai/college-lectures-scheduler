@@ -3,7 +3,7 @@ import Select from "react-select";
 
 const SectionForm = () => {
   const [sectionInfo, setSectionInfo] = useState({
-    engineerName: "",
+    name: "",
     email: "",
     course: [],
     courseCode: [],
@@ -78,7 +78,7 @@ const SectionForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(sectionInfo);
     try {
       const response = await fetch('/api/save_engineer', {
         method: 'POST',
@@ -104,16 +104,16 @@ const SectionForm = () => {
     >
       <div className="mb-4">
         <label
-          htmlFor="engineerName"
+          htmlFor="name"
           className="block text-gray-700 text-sm font-bold mb-2"
         >
           Teaching Assistant Name
         </label>
         <input
           type="text"
-          id="engineerName"
-          name="engineerName"
-          value={sectionInfo.engineerName}
+          id="name"
+          name="name"
+          value={sectionInfo.name}
           onChange={handleInputChange}
           className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
         />

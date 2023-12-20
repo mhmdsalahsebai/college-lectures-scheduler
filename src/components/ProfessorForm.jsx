@@ -9,7 +9,7 @@ const ProfessorForm = () => {
     courseCode: [],
     availability: [],
     phoneNumber: "",
-    room: "",
+    // room: "",
   });
 
   const daysOptions = [

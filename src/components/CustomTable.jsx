@@ -23,7 +23,6 @@ const CustomTable = () => {
       }
     };
     fetchData();
-    console.log('tableData', tableData);
   }, []);
 
   const [isModalOpen, setIsModalOpen] = useState(false);

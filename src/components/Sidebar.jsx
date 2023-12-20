@@ -15,7 +15,7 @@ const Sidebar = ({ setLogoutMessage }) => {
       if (response.ok) {
         setLogoutMessage("Logout successful!");
         setTimeout(() => {
-          window.location.reload();
+          window.location.replace("/");
         }, 1000);
       } else {
         console.error("Logout failed:", response.statusText);
@@ -41,9 +41,19 @@ const Sidebar = ({ setLogoutMessage }) => {
         <span className="mr-2">
           <BadgeOutlinedIcon style={{ fontSize: 24 }} />
         </span>
-        <Link href="/">
+        <Link href="/Professors">
           <span className="hidden group-hover:inline-block transition-all duration-1000">
-            Instructors
+            Professorss
+          </span>
+        </Link>
+      </div>
+      <div className="flex items-center rounded-lg text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 group-hover:p-2 group-hover:w-full">
+        <span className="mr-2">
+          <BadgeOutlinedIcon style={{ fontSize: 24 }} />
+        </span>
+        <Link href="/Engineers">
+          <span className="hidden group-hover:inline-block transition-all duration-1000">
+          Engineers
           </span>
         </Link>
       </div>

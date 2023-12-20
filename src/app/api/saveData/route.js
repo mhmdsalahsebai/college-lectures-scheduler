@@ -4,13 +4,9 @@ import fs from "fs";
 
 export async function POST(request) {
     const jsonData = await request.json();
-    // save in data file
-
     const filePath = path.join(process.cwd(), "data/tables",  "data.json");
 
     try {
-        console.log(filePath)
-        console.log(jsonData)
         fs.writeFileSync(filePath, JSON.stringify(jsonData));
         return NextResponse.json(
             { success: true },
@@ -22,10 +18,8 @@ export async function POST(request) {
         return NextResponse.json({ success: false }, { status: 500 });
     }
 }
-export async function GET(request) {
-
+export async function GET() {
     const filePath = path.join(process.cwd(), "data/tables", "data.json");
-
     try {
         const data = fs.readFileSync(filePath);
         return NextResponse.json(

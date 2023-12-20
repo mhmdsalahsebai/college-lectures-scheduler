@@ -37,3 +37,4 @@ next-env.d.ts
 
 /data/engineer/*
 /data/professors/*
+/data/tables/*
