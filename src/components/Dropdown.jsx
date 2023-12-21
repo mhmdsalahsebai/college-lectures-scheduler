@@ -35,7 +35,7 @@ const Dropdown = () => {
 
   return (
     <div>
-      <label>Choose a browser from this list:
+      <label>select year and term:
 <input  list="year"
           id="selectedCategory"
           name="selectedCategory"
