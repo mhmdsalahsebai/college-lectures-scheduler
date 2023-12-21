@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Dropdown = () => {
   const [subjectData, setSubjectData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedsubject, setselectedsubject] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,17 +18,32 @@ const Dropdown = () => {
         console.error('Error fetching data:', error);
       }
     };
+ 
 
     fetchData();
   }, [selectedCategory]);
-
-  const handleCategoryChange = (event) => {
+  const handleSelectChange = (event) => {
+    // Update the state with the selected value
     setSelectedCategory(event.target.value);
+
+  };
+  const handleSelectChange2 = (event) => {
+    // Update the state with the selected value
+    setselectedsubject(event.target.value);
+
   };
 
   return (
     <div>
-      <select onChange={handleCategoryChange} value={selectedCategory}>
+      <label>Choose a browser from this list:
+<input  list="year"
+          id="selectedCategory"
+          name="selectedCategory"
+          value={selectedCategory}
+          onChange={handleSelectChange} /></label>
+
+          
+<datalist id="year">
         <option value="">select year and term </option>
         <option value="1Year_1Term">1Year_1Term</option>
         <option value="1Year_2Term">1Year_2Term</option>
@@ -39,19 +55,23 @@ const Dropdown = () => {
         <option value="4Year_2Term">4Year_2Term</option>
         <option value="5Year_1Term">5Year_1Term</option>
         <option value="5Year_2Term">5Year_2Term</option>
-      </select>
+        </datalist>
+        <input  list="subject"
+          id="selectedsubject"
+          name="selectedsubject"
+          value={selectedsubject}
+          onChange={handleSelectChange2} />
+          <datalist id="subject">
 
-      {selectedCategory && (
-        <>
-          <select>
+     
             {subjectData.map(subject => (
-              <option key={subject["Subject code"]} value={subject["Subject code"]}>
+              <option key={subject["Subject code"]} value={subject["Subject name"]}>
                 {subject["Subject name"]}
               </option>
             ))}
-          </select>
-        </>
-      )}
+   
+           </datalist>
+
     </div>
   );
 };
