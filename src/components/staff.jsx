@@ -23,7 +23,7 @@ const Staff = ({ onSelect }) => {
   };
   return (
     <div>
-<label>Choose a browser from this list:
+<label>Choose a staff from this list:
 <input  list="browsers"
           id="selectedStaff"
           name="selectedStaff"
