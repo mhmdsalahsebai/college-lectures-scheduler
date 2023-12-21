@@ -56,8 +56,8 @@ export default function Page() {
       {isAuthorized ? (
         <>
           <Navbar />
-          <main className="overflow-y-auto h-[92vh] flex-1 flex flex-row md:flex-row sm:flex-row">
-            <Sidebar setLogoutMessage={setLogoutMessage} />
+          <main className="overflow-y-auto h-[95vh] flex-1 flex flex-row md:flex-row sm:flex-row">
+            <Sidebar className="h-full" setLogoutMessage={setLogoutMessage} />
             <div className="flex-1 p-2 text-white">
               <CustomTable />
               {logoutMessage && (

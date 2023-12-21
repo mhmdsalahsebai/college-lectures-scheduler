@@ -34,6 +34,14 @@ const InstructionTable = (prams) => {
     "email",
   ];
 
+  const Header_Name = [
+    "Name",
+    "Course",
+    "Course Code",
+    "Availability",
+    "Phone Number",
+    "Email",
+  ];
 
   return (
     <div className="container fixed px-4 mt-10"   >
@@ -41,7 +49,7 @@ const InstructionTable = (prams) => {
       <table className="w-full bg-white border m-auto border-gray-300 rounded-lg overflow-hidden">
         <thead className="bg-gray-800 text-white">
           <tr>
-            {head_table.map((name, index) => (
+            {Header_Name.map((name, index) => (
               <th
                 key={index}
                 className="py-2 px-4 border border-gray-300 text-center"

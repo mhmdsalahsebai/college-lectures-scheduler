@@ -42,19 +42,11 @@ const Login = ({ handleAuthorization }) => {
         <div className="flex justify-center mb-4">
           <div className="mr-2">
             <Image
-              src="/Images/eng.png"
+              src="/Images/logo.png"
               alt="Logo1"
-              width={150}
-              height={150}
+              width={260}
+              height={100}
               className="mt-1"
-            />
-          </div>
-          <div>
-            <Image
-              src="/Images/university.png"
-              alt="Logo2"
-              width={150}
-              height={150}
             />
           </div>
         </div>
