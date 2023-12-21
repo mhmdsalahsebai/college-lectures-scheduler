@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import Select from "react-select";
 
 const SectionForm = () => {
+  const [status, setStatus] = useState("");
+  if (status !== "") {
+    setTimeout(() => {
+      setStatus("");
+    }, 1000);
+  }
   const [sectionInfo, setSectionInfo] = useState({
     name: "",
     email: "",
@@ -78,7 +84,12 @@ const SectionForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(sectionInfo);
+    for (const [key, value] of Object.entries(sectionInfo)) {
+      if (value === "" || value.length === 0) {
+        setStatus("Please fill all fields");
+        return;
+      }
+    }
     try {
       const response = await fetch('/api/save_engineer', {
         method: 'POST',
@@ -89,7 +100,15 @@ const SectionForm = () => {
       });
 
       if (response.ok) {
-        console.log('Data sent successfully');
+        setSectionInfo({
+          name: "",
+          email: "",
+          course: [],
+          courseCode: [],
+          availability: [],
+          phoneNumber: "",
+        });
+        setStatus("Saved");
       } else {
         console.error('Failed to send data');
       }
@@ -97,7 +116,7 @@ const SectionForm = () => {
       console.error('Error sending data:', error);
     }
   };
-  return(
+  return (
     <form
       onSubmit={handleSubmit}
       className="w-3/4 mx-auto px-6 py-6 bg-white shadow-md rounded-md"
@@ -203,13 +222,24 @@ const SectionForm = () => {
           onChange={handleCourseCodeChange}
         />
       </div>
-
       <button
         type="submit"
         className="w-full bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
       >
         Add
       </button>
+      {status !== "" && (
+        (status === "Saved") ?
+          <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
+            {status}
+          </div>
+          :
+          <div className="fixed bottom-4 right-4 p-4 bg-red-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
+            {status}
+          </div>
+      )
+      }
+
     </form>
   );
 };

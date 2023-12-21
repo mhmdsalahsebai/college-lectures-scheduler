@@ -7,6 +7,9 @@ export async function POST(request) {
     const filePath = path.join(process.cwd(), "data/tables",  "data.json");
 
     try {
+        if (!fs.existsSync(path.join(process.cwd(), "data/tables"))) {
+            fs.mkdirSync(path.join(process.cwd(), "data/tables"));
+        }
         fs.writeFileSync(filePath, JSON.stringify(jsonData));
         return NextResponse.json(
             { success: true },

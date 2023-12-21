@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import Select from "react-select";
 
 const ProfessorForm = () => {
+  const [status, setStatus] = useState("");
+  if (status !== "") {
+    setTimeout(() => {
+      setStatus("");
+    }, 1000);
+  }
   const [professorInfo, setProfessorInfo] = useState({
     name: "",
     email: "",
@@ -79,7 +85,12 @@ const ProfessorForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(professorInfo);
+    for (const [key, value] of Object.entries(professorInfo)) {
+      if (value === "" || value.length === 0) {
+        setStatus("Please fill all fields");
+        return;
+      }
+    }
     try {
       const response = await fetch('/api/save_professor', {
         method: 'POST',
@@ -90,13 +101,22 @@ const ProfessorForm = () => {
       });
 
       if (response.ok) {
-        console.log('Data sent successfully');
+        setProfessorInfo({
+          name: "",
+          email: "",
+          course: [],
+          courseCode: [],
+          availability: [],
+          phoneNumber: "",
+        });
+        setStatus("Saved");
       } else {
         console.error('Failed to send data');
       }
     } catch (error) {
       console.error('Error sending data:', error);
     }
+
   };
 
   return (
@@ -212,6 +232,17 @@ const ProfessorForm = () => {
       >
         Add
       </button>
+      {status !== "" && (
+        (status === "Saved") ?
+          <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
+            {status}
+          </div>
+          :
+          <div className="fixed bottom-4 right-4 p-4 bg-red-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
+            {status}
+          </div>
+      )
+      }
     </form>
   );
 };
