@@ -11,22 +11,44 @@
 }
 
 body {
-  --bg-color: #f6f6f6;
-  --text-color: #444;
-  --primary-color: #1a1a1af3;
+  --bg-color-light: #f6f6f6;
+  --text-color-light: #444;
+  --bg-color-dark:  #252A2E;
+  --text-color-dark: #eee;
 
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--bg-color-light);
+  color: var(--text-color-light);
 }
+
+body.dark-theme {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+}
+
 #container {
-  --bg-color: #ffffff;
-  --text-color: #444;
-  --primary-color: #1a1a1af3;
+  --bg-color-light: #ffffff;
+  --text-color-light: #444;
+  --bg-color-dark: #1c1c1c;
+  --text-color-dark: #eee;
 
-  background-color: var(--bg-color);
-  color: var(--text-color);
+  background-color: var(--bg-color-light);
+  color: var(--text-color-light);
 }
 
+#container.dark-theme {
+  background-color: var(--bg-color-dark);
+  color: var(--text-color-dark);
+}
+
+#child {
+  --text-color-light: #444;
+  --text-color-dark: #444;
+  color: var(--text-color-light);
+}
+
+#child.dark-theme {
+  color: var(--text-color-dark);
+}
 
 @layer utilities {
   .btn_white { 
