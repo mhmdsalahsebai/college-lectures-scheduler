@@ -1,21 +1,26 @@
 import React, { useState } from "react";
-import Dropdown from './Dropdown';
-import Staff from './staff';
+import Dropdown from "./Dropdown";
+import Staff from "./staff";
 
 const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [type, setType] = useState("lecture");
   const [room, setRoom] = useState("");
+  const [clearData, setClearData] = useState(false);
 
   const handleSave = () => {
     onSave({ name, subject, type, room });
     onClose();
+    setClearData(true);
+    setRoom("");
   };
 
   const handleRemove = () => {
     onRemove();
     onClose();
+    setClearData(true);
+    setRoom("");
   };
 
   return (
@@ -35,16 +40,14 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
             >
               Name:
             </label>
-            <Staff />
+            <Staff clearData={clearData} />
           </div>
           <div className="mb-4">
             <label
               htmlFor="subject"
               className="block text-sm font-medium text-gray-700"
-            >
-              Subject:
-            </label>
-            <Dropdown />
+            ></label>
+            <Dropdown clearData={clearData} />
           </div>
           <div className="mb-4">
             <label
@@ -104,15 +107,15 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
                 Cancel
               </button>
             </div>
-            <div> 
-            {onRemove && (
-              <button
-                className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300"
-                onClick={handleRemove}
-              >
-                Remove
-              </button>
-            )}
+            <div>
+              {onRemove && (
+                <button
+                  className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 focus:outline-none focus:ring focus:border-red-300"
+                  onClick={handleRemove}
+                >
+                  Remove
+                </button>
+              )}
             </div>
           </div>
         </div>
