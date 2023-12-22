@@ -187,8 +187,17 @@ const CustomTable = ({ selectedYear }) => {
           ))}
         </tbody>
       </table>
-      <button id="button-excel" onClick={handleButtonClick}>Create Excel</button>
-
+      <button
+  id="button-excel"
+  onClick={handleButtonClick}
+  style={{
+    backgroundColor: '#4CAF50',
+    color: 'white',            
+    padding: '10px 15px',       
+    border: 'none',           
+    borderRadius: '5px',        
+    cursor: 'pointer',       
+  }}></button>
       <CustomModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
