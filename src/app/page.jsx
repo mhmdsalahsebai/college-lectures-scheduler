@@ -51,20 +51,52 @@ export default function Page() {
       }
     }
   };
+  const [selectedYear, setSelectedYear] = useState(0);
+  const list_year = [
+    "First Year",
+    "Second Year",
+    "Third Year",
+    "Fourth Year",
+  ]
+
   return (
     <div className="h-full w-full">
       {isAuthorized ? (
         <>
           <Navbar />
+          <div className="flex justify-center items-center bg-white dark:bg-gray-800 px-6 py-4 shadow-md w-full">
+            <ul class="flex">
+              {list_year.map((year, index) => (
+                <li class="mr-10">
+                  {index === selectedYear ? (
+                    <a
+                      class="text-blue-200 border-b-2 border-blue-500 pb-2"
+                      onClick={() => setSelectedYear(index)}
+                    >
+                      {year}
+                    </a>
+                  ) : (
+                    <a
+                      class="text-gray-200 hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 pb-2"
+                      onClick={() => setSelectedYear(index)}
+                    >
+                      {year}
+                    </a>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
           <main className="overflow-y-auto h-[95vh] flex-1 flex flex-row md:flex-row sm:flex-row">
             <Sidebar className="h-full" setLogoutMessage={setLogoutMessage} />
             <div className="flex-1 p-2 text-white">
-              <CustomTable />
+              <CustomTable selectedYear={selectedYear} />
               {logoutMessage && (
                 <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
                   {logoutMessage}
                 </div>
               )}
+
             </div>
           </main>
         </>
@@ -85,19 +117,20 @@ export default function Page() {
         </>
       ) : (
         <>
-        <NavbarLogin />
-        <h1 className="flex text-2xl font-medium items-center text-white justify-center h-screen">
-          Loading ...
-        </h1>
-        <div
+          <NavbarLogin />
+          <h1 className="flex text-2xl font-medium items-center text-white justify-center h-screen">
+            Loading ...
+          </h1>
+          <div
             className="fixed top-0 left-0 w-full h-full bg-cover bg-center"
             style={{
               backgroundImage: "url('/Images/bg.jpg')",
               zIndex: -1,
             }}
           ></div>
-      </>
-      )}
-    </div>
+        </>
+      )
+      }
+    </div >
   );
 }

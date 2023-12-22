@@ -23,6 +23,12 @@ export async function POST(request) {
 }
 export async function GET() {
     const filePath = path.join(process.cwd(), "data/professors");
+    if (!fs.existsSync(filePath)) {
+        return NextResponse.json(
+            { success: true, data: [] },
+            { status: 200, headers: { "content-type": "application/json" } }
+        );
+    }
     const fileNames = fs.readdirSync(filePath);
     const data = fileNames.map((fileName) => {
         const fileContent = fs.readFileSync(path.join(filePath, fileName), "utf8");

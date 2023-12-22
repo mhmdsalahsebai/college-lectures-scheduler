@@ -15,7 +15,6 @@ const InstructionTable = (prams) => {
         });
         const result = await response.json();
         if (result.data !== undefined) {
-          console.log('result', result.data);
           setTableData(result.data);
         }
       } catch (error) {

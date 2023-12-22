@@ -2,13 +2,12 @@
 import React, { useState, useEffect } from "react";
 import CustomModal from "./CustomModal";
 
-const CustomTable = () => {
+const CustomTable = ({ selectedYear }) => {
   const [tableData, setTableData] = useState([[]]);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("api/saveData", {
+        const response = await fetch("api/saveData?id=" + selectedYear, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -23,7 +22,7 @@ const CustomTable = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [selectedYear]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ row: 0, col: 0 });
@@ -77,7 +76,6 @@ const CustomTable = () => {
     const { row, col } = modalData;
 
     if (updatedData[row] && updatedData[row][col]) {
-      // Remove the data from the specified cell
       updatedData[row][col] = " ";
       setTableData(updatedData);
       handleSaveTable(updatedData);
@@ -86,7 +84,7 @@ const CustomTable = () => {
 
   const handleSaveTable = async (updatedData) => {
     try {
-      const response = await fetch("api/saveData", {
+      const response = await fetch("api/saveData?id=" + selectedYear, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -142,28 +140,25 @@ const CustomTable = () => {
               {days.map((_, colIndex) => (
                 <td
                   key={colIndex}
-                  className={`py-2 px-4 cursor-pointer border border-gray-300 text-center ${
-                    colIndex === 3 && rowIndex === 2 ? "bg-gray-700" : ""
-                  } ${
-                    tableData[rowIndex] &&
-                    tableData[rowIndex][colIndex] &&
-                    tableData[rowIndex][colIndex].type === "lecture"
+                  className={`py-2 px-4 cursor-pointer border border-gray-300 text-center ${colIndex === 3 && rowIndex === 2 ? "bg-gray-700" : ""
+                    } ${tableData[rowIndex] &&
+                      tableData[rowIndex][colIndex] &&
+                      tableData[rowIndex][colIndex].type === "lecture"
                       ? "bg-green-200"
                       : tableData[rowIndex] &&
                         tableData[rowIndex][colIndex] &&
                         tableData[rowIndex][colIndex].type === "section"
-                      ? "bg-blue-200"
-                      : ""
-                  }`}
+                        ? "bg-blue-200"
+                        : ""
+                    }`}
                   onClick={() => handleCellClick(rowIndex, colIndex)}
                 >
                   {tableData[rowIndex] && tableData[rowIndex][colIndex] && (
                     <span
-                      className={`${
-                        tableData[rowIndex][colIndex].type === "lecture"
-                          ? "bg-light-green-200"
-                          : "bg-light-blue-200"
-                      }`}
+                      className={`${tableData[rowIndex][colIndex].type === "lecture"
+                        ? "bg-light-green-200"
+                        : "bg-light-blue-200"
+                        }`}
                     >
                       {tableData[rowIndex][colIndex].subject} <br />
                       {tableData[rowIndex][colIndex].name} <br />
