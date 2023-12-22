@@ -7,10 +7,8 @@ const Staff = ({ onSelect, clearData }) => {
   const [selectedStaff, setSelectedStaff] = useState("");
 
   useEffect(() => {
-    if (clearData) {
-      setSelectedItem("");
-      setSelectedStaff("");
-    }
+    setSelectedItem("");
+    setSelectedStaff("");
   }, [clearData]);
 
   useEffect(() => {

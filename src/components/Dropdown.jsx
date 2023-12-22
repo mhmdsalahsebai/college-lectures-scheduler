@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
 
-const Dropdown = ({ clearData }) => {
+const Dropdown = ({ clearData, selectedYear, selectedSemester }) => {
   const [subjectData, setSubjectData] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedsubject, setselectedsubject] = useState("");
-
   useEffect(() => {
-    if (clearData) {
-      setselectedsubject("");
-      setSelectedCategory("");
-      setSubjectData([]);
-    }
+    setselectedsubject("");
   }, [clearData]);
 
   useEffect(() => {
+    const selectedCategory = (selectedYear + 1) + "Year_" + (selectedSemester + 1) + "Term";
+    setselectedsubject("");
     const fetchData = async () => {
       try {
         if (selectedCategory !== "") {
+          console.log(selectedCategory);
           const response = await fetch(`/${selectedCategory}.json`);
           const data = await response.json();
+          console.log(data);
 
           setSubjectData(data);
         }
@@ -27,13 +24,10 @@ const Dropdown = ({ clearData }) => {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchData();
-  }, [selectedCategory]);
-  const handleSelectChange = (event) => {
-    // Update the state with the selected value
-    setSelectedCategory(event.target.value);
-  };
+  }, [selectedYear, selectedSemester]);
+
+
   const handleSelectChange2 = (event) => {
     // Update the state with the selected value
     setselectedsubject(event.target.value);
@@ -41,30 +35,6 @@ const Dropdown = ({ clearData }) => {
 
   return (
     <div>
-      <input
-        className="mt-1 w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
-        list="year"
-        id="selectedCategory"
-        placeholder="select year and term:"
-        name="selectedCategory"
-        value={selectedCategory}
-        onChange={handleSelectChange}
-      />
-
-      <datalist id="year">
-        <option value="">select year and term </option>
-        <option value="1Year_1Term">1Year_1Term</option>
-        <option value="1Year_2Term">1Year_2Term</option>
-        <option value="2Year_1Term">2Year_1Term</option>
-        <option value="2Year_2Term">2Year_2Term</option>
-        <option value="3Year_1Term">3Year_1Term</option>
-        <option value="3Year_2Term">3Year_2Term</option>
-        <option value="4Year_1Term">4Year_1Term</option>
-        <option value="4Year_2Term">4Year_2Term</option>
-        <option value="5Year_1Term">5Year_1Term</option>
-        <option value="5Year_2Term">5Year_2Term</option>
-      </datalist>
-
       <input
         className="mt-1 w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
         list="subject"

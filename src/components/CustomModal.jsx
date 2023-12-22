@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Dropdown from "./Dropdown";
 import Staff from "./staff";
 
-const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
+const CustomModal = ({ isOpen, onClose, onSave, onRemove, selectedYear, selectedSemester }) => {
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [type, setType] = useState("lecture");
@@ -11,23 +11,25 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
 
   const handleSave = () => {
     onSave({ name, subject, type, room });
-    onClose();
-    setClearData(true);
-    setRoom("");
+    handleClose();
   };
-
   const handleRemove = () => {
     onRemove();
+    handleClose();
+  };
+  const handleClose = () => {
+    console.log("close");
     onClose();
-    setClearData(true);
+    setName("");
     setRoom("");
+    setSubject("");
+    setClearData(!clearData);
   };
 
   return (
     <div
-      className={`fixed inset-0 ${
-        isOpen ? "block" : "hidden"
-      } text-gray-900 bg-opacity-50 bg-gray-900`}
+      className={`fixed inset-0 ${isOpen ? "block" : "hidden"
+        } text-gray-900 bg-opacity-50 bg-gray-900`}
     >
       <div className="flex items-center justify-center h-screen">
         <div className="bg-white rounded-lg p-8 w-96">
@@ -49,7 +51,7 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
             >
               Subject:
             </label>
-            <Dropdown clearData={clearData} />
+            <Dropdown clearData={clearData} selectedYear={selectedYear} selectedSemester={selectedSemester} />
           </div>
           <div className="mb-4">
             <label
@@ -104,7 +106,7 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
               </button>
               <button
                 className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:border-gray-300"
-                onClick={onClose}
+                onClick={handleClose}
               >
                 Cancel
               </button>

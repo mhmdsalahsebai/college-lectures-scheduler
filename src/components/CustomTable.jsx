@@ -2,12 +2,12 @@
 import React, { useState, useEffect } from "react";
 import CustomModal from "./CustomModal";
 
-const CustomTable = ({ selectedYear }) => {
+const CustomTable = ({ selectedYear, selectedSemester }) => {
   const [tableData, setTableData] = useState([[]]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("api/saveData?id=" + selectedYear, {
+        const response = await fetch("api/saveData?id=" + selectedYear + selectedSemester, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -22,7 +22,7 @@ const CustomTable = ({ selectedYear }) => {
       }
     };
     fetchData();
-  }, [selectedYear]);
+  }, [selectedYear , selectedSemester]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ row: 0, col: 0 });
@@ -84,7 +84,7 @@ const CustomTable = ({ selectedYear }) => {
 
   const handleSaveTable = async (updatedData) => {
     try {
-      const response = await fetch("api/saveData?id=" + selectedYear, {
+      const response = await fetch("api/saveData?id=" + selectedYear + selectedSemester, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -176,6 +176,8 @@ const CustomTable = ({ selectedYear }) => {
         onClose={() => setIsModalOpen(false)}
         onSave={handleSave}
         onRemove={handleRemove}
+        selectedYear={selectedYear}
+        selectedSemester={selectedSemester}
       />
     </div>
   );

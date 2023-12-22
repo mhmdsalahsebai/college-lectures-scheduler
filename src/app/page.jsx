@@ -52,11 +52,16 @@ export default function Page() {
     }
   };
   const [selectedYear, setSelectedYear] = useState(0);
+  const [selectedSemester, setSelectedSemester] = useState(0);
   const list_year = [
     "First Year",
     "Second Year",
     "Third Year",
     "Fourth Year",
+  ]
+  const list_semester = [
+    "First Semester",
+    "Second Semester",
   ]
 
   return (
@@ -65,7 +70,7 @@ export default function Page() {
         <>
           <Navbar />
           <div className="flex justify-center items-center bg-white dark:bg-gray-800 px-6 py-4 shadow-md w-full">
-            <ul class="flex cursor-pointer">
+            <ul class="flex cursor-pointer ml-10 pd-10">
               {list_year.map((year, index) => (
                 <li class="mr-10">
                   {index === selectedYear ? (
@@ -84,13 +89,37 @@ export default function Page() {
                     </a>
                   )}
                 </li>
+
+              ))}
+            </ul>
+            {/* most right */}
+            <ul class="flex cursor-pointer ml-10 pd-10">
+              {list_semester.map((semester, index) => (
+                <li class="mr-10">
+                  {index === selectedSemester ? (
+                    <a
+                      class="text-green-200 border-b-2 border-green-500 pb-2"
+                      onClick={() => setSelectedSemester(index)}
+                    >
+                      {semester}
+                    </a>
+                  ) : (
+                    <a
+                      class="text-gray-200 hover:text-green-500 border-b-2 border-transparent hover:border-green-500 pb-2"
+                      onClick={() => setSelectedSemester(index)}
+                    >
+                      {semester}
+                    </a>
+                  )}
+                </li>
+
               ))}
             </ul>
           </div>
           <main className="overflow-y-auto h-[83vh] flex-1 flex flex-row md:flex-row sm:flex-row">
             <Sidebar className="h-full" setLogoutMessage={setLogoutMessage} />
             <div className="flex-1 p-2 text-white">
-              <CustomTable selectedYear={selectedYear} />
+              <CustomTable selectedYear={selectedYear} selectedSemester={selectedSemester} />
               {logoutMessage && (
                 <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
                   {logoutMessage}
