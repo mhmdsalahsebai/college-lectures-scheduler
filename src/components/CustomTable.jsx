@@ -80,7 +80,7 @@ const CustomTable = ({ selectedYear }) => {
   const handleButtonClick = () => {
     let button = document.querySelector("#button-excel");
     button.addEventListener("click", e => {
-      let table = document.querySelector("#tt")      ;
+      let table = document.getElementsByClassName("min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden")[0]      ;
       console.log(table);
       TableToExcel.convert(table);
     });
@@ -118,9 +118,8 @@ const CustomTable = ({ selectedYear }) => {
   };
 
   return (
-    <div className="container mx-auto mt-8"
-    id="tt">
-      <table className="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden" >
+    <div className="container mx-auto mt-8">
+      <table className="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
         <thead className="bg-gray-800 text-white">
           <tr>
             <th
