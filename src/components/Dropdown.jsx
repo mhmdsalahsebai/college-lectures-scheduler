@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Dropdown = ({ clearData, selectedYear, selectedSemester }) => {
+const Dropdown = ({ clearData, selectedYear, selectedSemester , setSubject}) => {
   const [subjectData, setSubjectData] = useState([]);
   const [selectedsubject, setselectedsubject] = useState("");
   useEffect(() => {
@@ -13,11 +13,8 @@ const Dropdown = ({ clearData, selectedYear, selectedSemester }) => {
     const fetchData = async () => {
       try {
         if (selectedCategory !== "") {
-          console.log(selectedCategory);
           const response = await fetch(`/${selectedCategory}.json`);
           const data = await response.json();
-          console.log(data);
-
           setSubjectData(data);
         }
       } catch (error) {
@@ -30,6 +27,7 @@ const Dropdown = ({ clearData, selectedYear, selectedSemester }) => {
 
   const handleSelectChange2 = (event) => {
     // Update the state with the selected value
+    setSubject(event.target.value);
     setselectedsubject(event.target.value);
   };
 

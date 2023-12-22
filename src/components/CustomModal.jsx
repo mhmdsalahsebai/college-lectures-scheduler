@@ -10,6 +10,10 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove, selectedYear, selected
   const [clearData, setClearData] = useState(false);
 
   const handleSave = () => {
+    if (!name || !subject || !room) {
+      alert("Please fill all fields!");
+      return;
+    }
     onSave({ name, subject, type, room });
     handleClose();
   };
@@ -18,7 +22,6 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove, selectedYear, selected
     handleClose();
   };
   const handleClose = () => {
-    console.log("close");
     onClose();
     setName("");
     setRoom("");
@@ -42,7 +45,7 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove, selectedYear, selected
             >
               Name:
             </label>
-            <Staff clearData={clearData} />
+            <Staff clearData={clearData} setName={setName} />
           </div>
           <div className="mb-4">
             <label
@@ -51,7 +54,7 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove, selectedYear, selected
             >
               Subject:
             </label>
-            <Dropdown clearData={clearData} selectedYear={selectedYear} selectedSemester={selectedSemester} />
+            <Dropdown selectedYear={selectedYear} selectedSemester={selectedSemester} clearData = {clearData} setSubject={setSubject} />
           </div>
           <div className="mb-4">
             <label

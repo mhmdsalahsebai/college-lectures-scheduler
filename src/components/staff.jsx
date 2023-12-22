@@ -1,12 +1,13 @@
 // Staff.js
 import React, { useState, useEffect } from "react";
 
-const Staff = ({ onSelect, clearData }) => {
+const Staff = ({ setName, clearData }) => {
   const [data, setData] = useState([]);
   const [selectedItem, setSelectedItem] = useState("");
   const [selectedStaff, setSelectedStaff] = useState("");
 
   useEffect(() => {
+    setName("");
     setSelectedItem("");
     setSelectedStaff("");
   }, [clearData]);
@@ -22,6 +23,7 @@ const Staff = ({ onSelect, clearData }) => {
 
   const handleSelectChange = (event) => {
     // Update the state with the selected value
+    setName(event.target.value);
     setSelectedStaff(event.target.value);
   };
   return (

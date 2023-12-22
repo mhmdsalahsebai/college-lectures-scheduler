@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import CustomModal from "./CustomModal";
+import TableToExcel from "@linways/table-to-excel";
+
 
 const CustomTable = ({ selectedYear, selectedSemester }) => {
   const [tableData, setTableData] = useState([[]]);
@@ -22,7 +24,7 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
       }
     };
     fetchData();
-  }, [selectedYear , selectedSemester]);
+  }, [selectedYear, selectedSemester]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ row: 0, col: 0 });
@@ -81,6 +83,14 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
       handleSaveTable(updatedData);
     }
   };
+  const handleClear = () => {
+    if (!confirm("Are you sure you want to clear the table?")) {
+      return;
+    }
+    setTableData([[]]);
+    handleSaveTable([[]]);
+  };
+
 
   const handleSaveTable = async (updatedData) => {
     try {
@@ -100,10 +110,18 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
       console.error("Error saving :", error);
     }
   };
+  const handleButtonClick = () => {
+    TableToExcel.convert(document.getElementById(selectedYear + selectedSemester), {
+      name: `Table_${selectedYear}_${selectedSemester}.xlsx`,
+      sheet: {
+        name: "Sheet 1",
+      },
+    });
+  }
 
   return (
     <div className="container mx-auto mt-8">
-      <table className="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
+      <table className="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden" id={selectedYear + selectedSemester}>
         <thead className="bg-gray-800 text-white">
           <tr>
             <th
@@ -171,6 +189,20 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
           ))}
         </tbody>
       </table>
+      <button
+        id="button-excel"
+        onClick={handleButtonClick}
+        className="fixed bottom-0 right-0 m-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded"
+      >
+        Export to Excel
+      </button>
+      <button
+        onClick={handleClear}
+        className="fixed bottom-0 m-8 bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 rounded"
+      >
+        Clear Table
+      </button>
+
       <CustomModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
