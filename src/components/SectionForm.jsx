@@ -180,6 +180,7 @@ const SectionForm = () => {
           Availability Days
         </label>
         <Select
+          className="text-gray-700"
           isMulti
           options={daysOptions}
           value={daysOptions.filter((option) =>
@@ -197,6 +198,7 @@ const SectionForm = () => {
           Course Name
         </label>
         <Select
+          className="text-gray-700"
           isMulti
           options={courseOptions}
           value={courseOptions.filter((option) =>
@@ -214,6 +216,7 @@ const SectionForm = () => {
           Course Code
         </label>
         <Select
+          className="text-gray-700"
           isMulti
           options={courseCodeOptions}
           value={courseCodeOptions.filter((option) =>

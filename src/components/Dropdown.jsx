@@ -30,41 +30,38 @@ const Dropdown = ({ clearData }) => {
 
     fetchData();
   }, [selectedCategory]);
-  const handleSelectChange = (event) => {
-    // Update the state with the selected value
-    setSelectedCategory(event.target.value);
+
+  const options = [
+    { value: "1Year_1Term", label: "1Year_1Term" },
+    { value: "1Year_2Term", label: "1Year_2Term" },
+    { value: "2Year_1Term", label: "2Year_1Term" },
+    { value: "2Year_2Term", label: "2Year_2Term" },
+    { value: "3Year_1Term", label: "3Year_1Term" },
+    { value: "3Year_2Term", label: "3Year_2Term" },
+    { value: "4Year_1Term", label: "4Year_1Term" },
+    { value: "4Year_2Term", label: "4Year_2Term" },
+    { value: "5Year_1Term", label: "5Year_1Term" },
+    { value: "5Year_2Term", label: "5Year_2Term" },
+  ];
+
+  const handleSelectChange = (selectedOption) => {
+    setSelectedCategory(selectedOption.value);
   };
-  const handleSelectChange2 = (event) => {
-    // Update the state with the selected value
-    setselectedsubject(event.target.value);
+
+  const handleSelectChange2 = (selectedOption) => {
+    setselectedsubject(selectedOption.label);
   };
 
   return (
     <div>
       <label>
-        select year and term:
-        <input
-          list="year"
-          id="selectedCategory"
-          name="selectedCategory"
-          value={selectedCategory}
+        Select Year and Term:
+        <Select
+          options={options}
+          value={options.find((option) => option.value === selectedCategory)}
           onChange={handleSelectChange}
         />
       </label>
-
-      <datalist id="year">
-        <option value="">select year and term </option>
-        <option value="1Year_1Term">1Year_1Term</option>
-        <option value="1Year_2Term">1Year_2Term</option>
-        <option value="2Year_1Term">2Year_1Term</option>
-        <option value="2Year_2Term">2Year_2Term</option>
-        <option value="3Year_1Term">3Year_1Term</option>
-        <option value="3Year_2Term">3Year_2Term</option>
-        <option value="4Year_1Term">4Year_1Term</option>
-        <option value="4Year_2Term">4Year_2Term</option>
-        <option value="5Year_1Term">5Year_1Term</option>
-        <option value="5Year_2Term">5Year_2Term</option>
-      </datalist>
 
       <label
         htmlFor="selectedsubject"
@@ -72,20 +69,15 @@ const Dropdown = ({ clearData }) => {
       >
         Subject
       </label>
-      <input
-        list="subject"
+      <Select
         id="selectedsubject"
-        name="selectedsubject"
-        value={selectedsubject}
+        options={subjectData.map((subject) => ({
+          value: subject["Subject code"],
+          label: subject["Subject name"],
+        }))}
+        value={options.find((option) => option.label === selectedsubject)}
         onChange={handleSelectChange2}
       />
-      <datalist id="subject">
-        {subjectData.map((subject) => (
-          <option key={subject["Subject code"]} value={subject["Subject name"]}>
-            {subject["Subject name"]}
-          </option>
-        ))}
-      </datalist>
     </div>
   );
 };
