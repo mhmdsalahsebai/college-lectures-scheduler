@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import CustomModal from "./CustomModal";
+import TableToExcel from "@linways/table-to-excel";
 
 const CustomTable = ({ selectedYear }) => {
   const [tableData, setTableData] = useState([[]]);
@@ -22,10 +23,14 @@ const CustomTable = ({ selectedYear }) => {
       }
     };
     fetchData();
+   
   }, [selectedYear]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ row: 0, col: 0 });
+
+ 
+
 
   const days = [
     "Saturday",
@@ -60,6 +65,7 @@ const CustomTable = ({ selectedYear }) => {
       updatedData[row] = [];
     }
 
+
     updatedData[row][col] = {
       name: document.getElementById("selectedStaff").value,
       subject: document.getElementById("selectedSubject").value,
@@ -69,6 +75,15 @@ const CustomTable = ({ selectedYear }) => {
     setTableData(updatedData);
     setIsModalOpen(false);
     handleSaveTable(updatedData);
+  };
+
+  const handleButtonClick = () => {
+    let button = document.querySelector("#button-excel");
+    button.addEventListener("click", e => {
+      let table = document.getElementsByClassName("min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden")[0]      ;
+      console.log(table);
+      TableToExcel.convert(table);
+    });
   };
 
   const handleRemove = () => {
@@ -99,6 +114,7 @@ const CustomTable = ({ selectedYear }) => {
     } catch (error) {
       console.error("Error saving :", error);
     }
+    
   };
 
   return (
@@ -171,6 +187,8 @@ const CustomTable = ({ selectedYear }) => {
           ))}
         </tbody>
       </table>
+      <button id="button-excel" onClick={handleButtonClick}>Create Excel</button>
+
       <CustomModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
