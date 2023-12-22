@@ -43,7 +43,7 @@ const InstructionTable = (prams) => {
   ];
 
   return (
-    <div className="container fixed px-4 mt-10"   >
+    <div className="container fixed px-4 ml-6 w-full"   >
 
       <table className="w-full bg-white border m-auto border-gray-300 rounded-lg overflow-hidden">
         <thead className="bg-gray-800 text-white">

@@ -62,7 +62,7 @@ const CustomTable = ({ selectedYear }) => {
 
     updatedData[row][col] = {
       name: document.getElementById("selectedStaff").value,
-      subject: document.getElementById("selectedsubject").value,
+      subject: document.getElementById("selectedSubject").value,
       room: data.room,
       type: data.type,
     };

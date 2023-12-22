@@ -46,7 +46,9 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove }) => {
             <label
               htmlFor="subject"
               className="block text-sm font-medium text-gray-700"
-            ></label>
+            >
+              Subject:
+            </label>
             <Dropdown clearData={clearData} />
           </div>
           <div className="mb-4">

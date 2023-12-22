@@ -41,16 +41,15 @@ const Dropdown = ({ clearData }) => {
 
   return (
     <div>
-      <label>
-        select year and term:
-        <input
-          list="year"
-          id="selectedCategory"
-          name="selectedCategory"
-          value={selectedCategory}
-          onChange={handleSelectChange}
-        />
-      </label>
+      <input
+        className="mt-1 w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+        list="year"
+        id="selectedCategory"
+        placeholder="select year and term:"
+        name="selectedCategory"
+        value={selectedCategory}
+        onChange={handleSelectChange}
+      />
 
       <datalist id="year">
         <option value="">select year and term </option>
@@ -66,16 +65,12 @@ const Dropdown = ({ clearData }) => {
         <option value="5Year_2Term">5Year_2Term</option>
       </datalist>
 
-      <label
-        htmlFor="selectedsubject"
-        style={{ display: "block", marginTop: "10px" }}
-      >
-        Subject
-      </label>
       <input
+        className="mt-1 w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
         list="subject"
-        id="selectedsubject"
-        name="selectedsubject"
+        id="selectedSubject"
+        placeholder="Choose a Subject"
+        name="selectedSubject"
         value={selectedsubject}
         onChange={handleSelectChange2}
       />

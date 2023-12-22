@@ -28,24 +28,23 @@ const Staff = ({ onSelect, clearData }) => {
   };
   return (
     <div>
-      <label>
-        Choose a staff from this list:
-        <input
-          list="browsers"
-          id="selectedStaff"
-          name="selectedStaff"
-          value={selectedStaff}
-          onChange={handleSelectChange}
-        />
-      </label>
+      <input
+        className="mt-1 w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
+        placeholder="Choose from staff list"
+        list="browsers"
+        id="selectedStaff"
+        name="selectedStaff"
+        value={selectedStaff}
+        onChange={handleSelectChange}
+      />
 
       <datalist id="browsers">
         <option value="" disabled>
           Select from Staff
         </option>
         {data.map((item) => (
-          <option key={item["id"]} value={item["Name"]}>
-            {item["Name"]}
+          <option key={item.id} value={item.Name}>
+            {item.Name}
           </option>
         ))}
       </datalist>
