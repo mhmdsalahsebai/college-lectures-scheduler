@@ -64,7 +64,7 @@ export default function Page() {
       {isAuthorized ? (
         <>
           <Navbar />
-          <div className="flex justify-center items-center bg-white dark:bg-gray-800 px-6 py-4 shadow-md w-full">
+          <div className="flex justify-center items-center bg-black dark:bg-gray-800 px-6 py-4 shadow-md w-full">
             <ul class="flex cursor-pointer">
               {list_year.map((year, index) => (
                 <li class="mr-10">
