@@ -1,7 +1,8 @@
 import "../styles/globals.css";
 
 export const metadata = {
-  title: 'College Lectures Scheduler',
+  title: 'Scheduly',
+  description: 'A scheduling app for students at the University of Port Said',
 }
 
 export default function RootLayout({ children }) {

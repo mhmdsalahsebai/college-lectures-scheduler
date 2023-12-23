@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import CustomModal from "./CustomModal";
 import TableToExcel from "@linways/table-to-excel";
+import GetAppIcon from '@mui/icons-material/GetApp';
 
 const CustomTable = ({ selectedYear }) => {
   const [tableData, setTableData] = useState([[]]);
@@ -23,13 +24,13 @@ const CustomTable = ({ selectedYear }) => {
       }
     };
     fetchData();
-   
+
   }, [selectedYear]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalData, setModalData] = useState({ row: 0, col: 0 });
 
- 
+
 
 
   const days = [
@@ -80,7 +81,7 @@ const CustomTable = ({ selectedYear }) => {
   const handleButtonClick = () => {
     let button = document.querySelector("#button-excel");
     button.addEventListener("click", e => {
-      let table = document.getElementsByClassName("min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden")[0]      ;
+      let table = document.getElementsByClassName("min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden")[0];
       console.log(table);
       TableToExcel.convert(table);
     });
@@ -114,7 +115,7 @@ const CustomTable = ({ selectedYear }) => {
     } catch (error) {
       console.error("Error saving :", error);
     }
-    
+
   };
 
   return (
@@ -188,16 +189,22 @@ const CustomTable = ({ selectedYear }) => {
         </tbody>
       </table>
       <button
-  id="button-excel"
-  onClick={handleButtonClick}
-  style={{
-    backgroundColor: '#4CAF50',
-    color: 'white',            
-    padding: '10px 15px',       
-    border: 'none',           
-    borderRadius: '5px',        
-    cursor: 'pointer',       
-  }}></button>
+        id="button-excel"
+        onClick={handleButtonClick}
+        style={{
+          margin: '10px auto',
+          text: 'center',
+          backgroundColor: '#4CAF50',
+          color: 'white',
+          padding: '10px 15px',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          hover: 'opacity: 0.8',
+        }}>
+          <GetAppIcon style={{ fontSize: 24 }} />
+          Export Data
+          </button>
       <CustomModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

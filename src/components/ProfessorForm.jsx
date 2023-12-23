@@ -92,10 +92,10 @@ const ProfessorForm = () => {
       }
     }
     try {
-      const response = await fetch("/api/save_professor", {
-        method: "POST",
+      const response = await fetch('/api/save_professor', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(professorInfo),
       });
@@ -111,11 +111,12 @@ const ProfessorForm = () => {
         });
         setStatus("Saved");
       } else {
-        console.error("Failed to send data");
+        console.error('Failed to send data');
       }
     } catch (error) {
-      console.error("Error sending data:", error);
+      console.error('Error sending data:', error);
     }
+
   };
 
   return (
@@ -182,7 +183,7 @@ const ProfessorForm = () => {
           Availability Days
         </label>
         <Select
-          className="text-black"
+          className="text-gray-700"
           isMulti
           options={daysOptions}
           value={daysOptions.filter((option) =>
@@ -200,7 +201,7 @@ const ProfessorForm = () => {
           Course Name
         </label>
         <Select
-          className="text-black"
+          className="text-gray-700"
           isMulti
           options={courseOptions}
           value={courseOptions.filter((option) =>
@@ -218,7 +219,7 @@ const ProfessorForm = () => {
           Course Code
         </label>
         <Select
-          className="text-black"
+          className="text-gray-700"
           isMulti
           options={courseCodeOptions}
           value={courseCodeOptions.filter((option) =>
@@ -234,16 +235,17 @@ const ProfessorForm = () => {
       >
         Add
       </button>
-      {status !== "" &&
-        (status === "Saved" ? (
+      {status !== "" && (
+        (status === "Saved") ?
           <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
             {status}
           </div>
-        ) : (
+          :
           <div className="fixed bottom-4 right-4 p-4 bg-red-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
             {status}
           </div>
-        ))}
+      )
+      }
     </form>
   );
 };
