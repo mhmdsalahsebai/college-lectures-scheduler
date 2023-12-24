@@ -1,37 +1,4 @@
 "use client";
-
-if (typeof Node === "function" && Node.prototype) {
-  const originalRemoveChild = Node.prototype.removeChild;
-  Node.prototype.removeChild = function (child) {
-    if (child.parentNode !== this) {
-      if (console) {
-        console.warn(
-          "Cannot remove a child from a different parent",
-          child,
-          this
-        );
-      }
-      return child;
-    }
-    return originalRemoveChild.apply(this, arguments);
-  };
-
-  const originalInsertBefore = Node.prototype.insertBefore;
-  Node.prototype.insertBefore = function (newNode, referenceNode) {
-    if (referenceNode && referenceNode.parentNode !== this) {
-      if (console) {
-        console.warn(
-          "Cannot insert before a reference node from a different parent",
-          referenceNode,
-          this
-        );
-      }
-      return newNode;
-    }
-    return originalInsertBefore.apply(this, arguments);
-  };
-}
-
 import React, { useState, useEffect } from 'react';
 import '../../styles/globals.css';
 
@@ -83,7 +50,7 @@ const SettingsPage = () => {
   };
 
   return (
-    <div id='container' className="container mx-auto p-6 mt-4 rounded-lg bg-white shadow-md">
+    <div id='container' className="container mx-auto pt-20 p-6 mt-4 rounded-lg bg-white shadow-md">
       <h1 className="text-2xl font-bold mb-4">Settings</h1>
 
       <div id='child' className="bg-white p-6 rounded-lg shadow-md">
