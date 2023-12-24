@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
-const CustomModal = ({ prvData , isOpen, onClose, onSave, onRemove, selectedYear, selectedSemester }) => {
+const CustomModel = ({ prvData , isOpen, onClose, onSave, onRemove, selectedYear, selectedSemester }) => {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
@@ -197,4 +197,4 @@ const CustomModal = ({ prvData , isOpen, onClose, onSave, onRemove, selectedYear
   );
 };
 
-export default CustomModal;
+export default CustomModel;

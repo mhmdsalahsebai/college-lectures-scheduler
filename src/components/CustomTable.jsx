@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import CustomModal from "./CustomModal";
+import CustomModel from "./CustomModel";
 import TableToExcel from "@linways/table-to-excel";
 
 
@@ -206,7 +206,7 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
         Clear Table
       </button>
 
-      <CustomModal
+      <CustomModel
         prvData={prvData}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
