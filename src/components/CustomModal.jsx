@@ -1,13 +1,62 @@
-import React, { useState } from "react";
-import Dropdown from "./Dropdown";
-import Staff from "./staff";
+import React, { useState, useEffect } from "react";
+import Select from "react-select";
 
-const CustomModal = ({ isOpen, onClose, onSave, onRemove, selectedYear, selectedSemester }) => {
+const CustomModal = ({ prvData , isOpen, onClose, onSave, onRemove, selectedYear, selectedSemester }) => {
+  const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [type, setType] = useState("lecture");
   const [room, setRoom] = useState("");
-  const [clearData, setClearData] = useState(false);
+  const [subjectData, setSubjectData] = useState([]);
+
+  useEffect(() => {
+    if (prvData && prvData.name) {
+      setName(prvData.name);
+      setSubject(prvData.subject);
+      setType(prvData.type);
+      setRoom(prvData.room);
+    }
+    else {
+      setName("");
+      setSubject("");
+      setType("lecture");
+      setRoom("");
+    }
+  }, [prvData]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("/staff.json");
+        const data = await response.json();
+
+        setData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const selectedCategory = (selectedYear + 2) + "Year_" + (selectedSemester + 1) + "Term";
+        const response = await fetch(`/${selectedCategory}.json`);
+        const data = await response.json();
+
+        setSubjectData(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [selectedYear, selectedSemester]);
+
+  const optionsName = data.map((item) => ({
+    value: item["Name"],
+    label: item["Name"],
+  }));
+
 
   const handleSave = () => {
     if (!name || !subject || !room) {
@@ -15,20 +64,23 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove, selectedYear, selected
       return;
     }
     onSave({ name, subject, type, room });
-    handleClose();
-  };
-  const handleRemove = () => {
-    onRemove();
-    handleClose();
-  };
-  const handleClose = () => {
-    onClose();
-    setName("");
-    setRoom("");
-    setSubject("");
-    setClearData(!clearData);
   };
 
+  const handleRemove = () => {
+    onRemove();
+  };
+
+  const optionsSubject = subjectData.map((item) => ({
+    value: item["Subject code"],
+    label: item["Subject name"],
+  }));
+  const handleSelectName = (selectedOption) => {
+    setName(selectedOption.value);
+  };
+
+  const handleSelectSubject = (selectedOption) => {
+    setSubject(selectedOption.label);
+  };
   return (
     <div
       className={`fixed inset-0 ${isOpen ? "block" : "hidden"
@@ -44,17 +96,31 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove, selectedYear, selected
               className="block text-sm font-medium text-gray-700"
             >
               Name:
+              <Select
+                id="selectedStaff"
+                options={optionsName}
+                value={optionsName.find((option) => option.value === name) || ""}
+                onChange={handleSelectName}
+              />
             </label>
-            <Staff clearData={clearData} setName={setName} />
           </div>
           <div className="mb-4">
+
             <label
               htmlFor="subject"
-              className="block text-sm font-medium text-gray-700"
+              style={{ display: "block", marginTop: "10px" }}
             >
-              Subject:
+              Subject
             </label>
-            <Dropdown selectedYear={selectedYear} selectedSemester={selectedSemester} clearData = {clearData} setSubject={setSubject} />
+            <Select
+              id="subject"
+              options={subjectData.map((subject) => ({
+                value: subject["Subject code"],
+                label: subject["Subject name"],
+              }))}
+              value={optionsSubject.find((option) => option.label === subject) || ""}
+              onChange={handleSelectSubject}
+            />
           </div>
           <div className="mb-4">
             <label
@@ -109,7 +175,7 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove, selectedYear, selected
               </button>
               <button
                 className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md hover:bg-gray-400 focus:outline-none focus:ring focus:border-gray-300"
-                onClick={handleClose}
+                onClick={onClose}
               >
                 Cancel
               </button>
@@ -127,7 +193,7 @@ const CustomModal = ({ isOpen, onClose, onSave, onRemove, selectedYear, selected
           </div>
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

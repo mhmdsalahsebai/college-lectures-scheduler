@@ -6,6 +6,7 @@ import TableToExcel from "@linways/table-to-excel";
 
 const CustomTable = ({ selectedYear, selectedSemester }) => {
   const [tableData, setTableData] = useState([[]]);
+  const [prvData, setPrvData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -49,6 +50,7 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
     if (row === 2 && col === 3) {
       return;
     }
+    setPrvData(tableData[row] && tableData[row][col] ? tableData[row][col] : []);
     setModalData({ row, col });
     setIsModalOpen(true);
   };
@@ -63,8 +65,8 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
     }
 
     updatedData[row][col] = {
-      name: document.getElementById("selectedStaff").value,
-      subject: document.getElementById("selectedSubject").value,
+      name: data.name,
+      subject: data.subject,
       room: data.room,
       type: data.type,
     };
@@ -82,6 +84,7 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
       setTableData(updatedData);
       handleSaveTable(updatedData);
     }
+    setIsModalOpen(false);
   };
   const handleClear = () => {
     if (!confirm("Are you sure you want to clear the table?")) {
@@ -204,6 +207,7 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
       </button>
 
       <CustomModal
+        prvData={prvData}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSave}
