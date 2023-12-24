@@ -87,7 +87,7 @@ export default function Page() {
               ))}
             </ul>
           </div>
-          <main className="overflow-y-auto h-[88vh] flex-1 flex flex-row md:flex-row sm:flex-row">
+          <main className="overflow-y-auto h-[84vh] flex-1 flex flex-row md:flex-row sm:flex-row">
             <Sidebar className="h-full" setLogoutMessage={setLogoutMessage} />
             <div className="flex-1 p-2 text-white">
               <CustomTable selectedYear={selectedYear} />

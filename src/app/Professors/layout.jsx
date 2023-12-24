@@ -40,7 +40,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="fixed top-0 left-0 w-full h-full">
         <Navbar />
-        <main className="h-[95vh] flex">
+        <main className="h-[92vh] flex">
           <Sidebar className="h-full " setLogoutMessage={setLogoutMessage} />
           {children}
           {logoutMessage && (
