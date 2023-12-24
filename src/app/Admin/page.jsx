@@ -1,50 +1,43 @@
 "use client";
 import "../../styles/globals.css";
-import React from "react";
-import ProfessorForm from "@/components/ProfessorForm";
-import SectionForm from "@/components/SectionForm";
+import { useState, useEffect } from "react";
+import InfoForm from "@/components/InfoForm";
 
-
-if (typeof Node === 'function' && Node.prototype) {
-  const originalRemoveChild = Node.prototype.removeChild;
-  Node.prototype.removeChild = function (child) {
-    if (child.parentNode !== this) {
-      if (console) {
-        console.warn('Cannot remove a child from a different parent', child, this);
-      }
-      return child;
-    }
-    return originalRemoveChild.apply(this, arguments);
-  };
-
-  const originalInsertBefore = Node.prototype.insertBefore;
-  Node.prototype.insertBefore = function (newNode, referenceNode) {
-    if (referenceNode && referenceNode.parentNode !== this) {
-      if (console) {
-        console.warn(
-          'Cannot insert before a reference node from a different parent',
-          referenceNode,
-          this
-        );
-      }
-      return newNode;
-    }
-    return originalInsertBefore.apply(this, arguments);
-  };
-}
-
-export default function PageComponent() {
+export default function Page() {
+  const [selectedInstructor, setSelectedInstructor] = useState("Professor");
+  const list_Instructor = [
+    "Professor",
+    "Engineer",
+  ]
   return (
-    <main className="flex-1 p-10">
-      <div key='uniqueKey'>
-        <h1 className="text-3xl font-bold mb-6">Professor Information</h1>
-
-
-        <ProfessorForm />
-        <hr className="my-8" />
-        <h1 className="text-3xl font-bold mb-6">Section Information</h1>
-        <SectionForm />
+    <main className="flex-1 h-screen">
+      <div className="flex justify-center items-center bg-white dark:bg-gray-800 px-4 py-4 shadow-md w-full ">
+        <ul className="flex cursor-pointer ml-10 pd-10 pg-black">
+          {list_Instructor.map((instructor) => (
+            <li className="mr-10">
+              {instructor === selectedInstructor ? (
+                <a
+                  className="text-green-200 border-b-2 border-green-500 pb-2"
+                  onClick={() => setSelectedInstructor(instructor)}
+                >
+                  {instructor}
+                </a>
+              ) : (
+                <a
+                  className="text-gray-200 hover:text-green-500 border-b-2 border-transparent hover:border-green-500 pb-2"
+                  onClick={() => setSelectedInstructor(instructor)}
+                >
+                  {instructor}
+                </a>
+              )}
+            </li>
+          ))}
+        </ul>
       </div>
-    </main>
+      <div >
+        <h1 className="flex  text-3xl font-bold mb-6 pt-6 justify-center ">{selectedInstructor} form</h1>
+        <InfoForm selectedInstructor={selectedInstructor} />
+      </div>
+    </main >
   );
 }

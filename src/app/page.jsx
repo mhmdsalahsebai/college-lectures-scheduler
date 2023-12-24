@@ -65,59 +65,58 @@ export default function Page() {
   ]
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full z-10">
+    <div className="flex">
       {isAuthorized ? (
         <>
-          <Navbar />
-          <div className="flex justify-center items-center bg-white dark:bg-gray-800 px-6 py-4 shadow-md w-full">
-            <ul class="flex cursor-pointer ml-10 pd-10">
-              {list_year.map((year, index) => (
-                <li class="mr-10">
-                  {index === selectedYear ? (
-                    <a
-                      class="text-blue-200 border-b-2 border-blue-500 pb-2"
-                      onClick={() => setSelectedYear(index)}
-                    >
-                      {year}
-                    </a>
-                  ) : (
-                    <a
-                      class="text-gray-200 hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 pb-2"
-                      onClick={() => setSelectedYear(index)}
-                    >
-                      {year}
-                    </a>
-                  )}
-                </li>
+          <Navbar className="flex-1" />
+          <Sidebar setLogoutMessage={setLogoutMessage} />
+          <main className="overflow-y-auto w-screen md:flex-row sm:flex-row">
+            <div className="flex  pt-20  justify-center items-center bg-white dark:bg-gray-800 px-6 py-4 shadow-md w-full">
+              <ul class="flex cursor-pointer ml-10 pd-10">
+                {list_year.map((year, index) => (
+                  <li class="mr-10">
+                    {index === selectedYear ? (
+                      <a
+                        class="text-blue-200 border-b-2 border-blue-500 pb-2"
+                        onClick={() => setSelectedYear(index)}
+                      >
+                        {year}
+                      </a>
+                    ) : (
+                      <a
+                        class="text-gray-200 hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 pb-2"
+                        onClick={() => setSelectedYear(index)}
+                      >
+                        {year}
+                      </a>
+                    )}
+                  </li>
 
-              ))}
-            </ul>
-            {/* most right */}
-            <ul class="flex cursor-pointer ml-10 pd-10">
-              {list_semester.map((semester, index) => (
-                <li class="mr-10">
-                  {index === selectedSemester ? (
-                    <a
-                      class="text-green-200 border-b-2 border-green-500 pb-2"
-                      onClick={() => setSelectedSemester(index)}
-                    >
-                      {semester}
-                    </a>
-                  ) : (
-                    <a
-                      class="text-gray-200 hover:text-green-500 border-b-2 border-transparent hover:border-green-500 pb-2"
-                      onClick={() => setSelectedSemester(index)}
-                    >
-                      {semester}
-                    </a>
-                  )}
-                </li>
+                ))}
+              </ul>
+              <ul class="flex cursor-pointer ml-10 pd-10">
+                {list_semester.map((semester, index) => (
+                  <li class="mr-10">
+                    {index === selectedSemester ? (
+                      <a
+                        class="text-green-200 border-b-2 border-green-500 pb-2"
+                        onClick={() => setSelectedSemester(index)}
+                      >
+                        {semester}
+                      </a>
+                    ) : (
+                      <a
+                        class="text-gray-200 hover:text-green-500 border-b-2 border-transparent hover:border-green-500 pb-2"
+                        onClick={() => setSelectedSemester(index)}
+                      >
+                        {semester}
+                      </a>
+                    )}
+                  </li>
 
-              ))}
-            </ul>
-          </div>
-          <main className="overflow-y-auto h-[83vh] flex-1 flex flex-row md:flex-row sm:flex-row">
-            <Sidebar className="h-full" setLogoutMessage={setLogoutMessage} />
+                ))}
+              </ul>
+            </div>
             <div className="flex-1 p-2 text-white">
               <CustomTable selectedYear={selectedYear} selectedSemester={selectedSemester} />
               {logoutMessage && (
@@ -147,7 +146,7 @@ export default function Page() {
       ) : (
         <>
           <NavbarLogin />
-          <h1 className="flex text-2xl font-medium items-center text-white justify-center h-screen">
+          <h1 className="flex text-2xl font-medium items-center text-white justify-center">
             Loading ...
           </h1>
           <div

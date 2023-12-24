@@ -10,7 +10,7 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("api/saveData?id=" + selectedYear + selectedSemester, {
+        const response = await fetch("api/tablesData?id=" + selectedYear + selectedSemester, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -97,7 +97,7 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
 
   const handleSaveTable = async (updatedData) => {
     try {
-      const response = await fetch("api/saveData?id=" + selectedYear + selectedSemester, {
+      const response = await fetch("api/tablesData?id=" + selectedYear + selectedSemester, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -123,7 +123,7 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
   }
 
   return (
-    <div className="container mx-auto mt-8">
+    <div className="mx-auto mt-8">
       <table className="min-w-full bg-white border border-gray-300 rounded-lg overflow-hidden" id={selectedYear + selectedSemester}>
         <thead className="bg-gray-800 text-white">
           <tr>

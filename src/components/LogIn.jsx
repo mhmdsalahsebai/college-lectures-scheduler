@@ -37,7 +37,7 @@ const Login = ({ handleAuthorization }) => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
+    <div className="flex items-center justify-center h-screen w-screen">
       <div className="w-96 p-8 bg-white rounded-2xl">
         <div className="flex justify-center mb-4">
           <div className="mr-2">

@@ -7,6 +7,7 @@ const InstructionTable = (prams) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log(prams.api)
         const response = await fetch('api/' + prams.api, {
           method: 'GET',
           headers: {
@@ -43,9 +44,9 @@ const InstructionTable = (prams) => {
   ];
 
   return (
-    <div className="container fixed px-4 ml-6 w-full"   >
+    <div className="fixed px-4 ml-6 w-11/12"   >
 
-      <table className="w-full bg-white border m-auto border-gray-300 rounded-lg overflow-hidden">
+      <table className="w-full bg-white border border-gray-300 rounded-lg overflow-hidden">
         <thead className="bg-gray-800 text-white">
           <tr>
             {Header_Name.map((name, index) => (
