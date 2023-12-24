@@ -231,13 +231,14 @@ const InfoForm = ({ selectedInstructor }) => {
           />
         </div>
       </div>
-
-      <button
-        type="submit"
-        className="flex w-1/2 justify-center bg-blue-500 text-white p-3 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
-      >
-        Add
-      </button>
+      <div className="flex justify-center pt-10">
+        <button
+          type="submit"
+          className="w-5/12 justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+        >
+          Add
+        </button>
+      </div>
       {status !== "" && (status === "Saved" ? (
         <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
           {status}
