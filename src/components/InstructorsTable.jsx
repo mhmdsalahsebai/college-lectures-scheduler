@@ -3,11 +3,26 @@ import React, { useState, useEffect } from "react";
 
 const InstructionTable = (prams) => {
   const [tableData, setTableData] = useState([[]]);
-
+  const handleDelete = async (name) => {
+    try {
+      const response = await fetch("api/" + prams.api, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name }),
+      });
+      const result = await response.json();
+      if (result.data !== undefined) {
+        setTableData(result.data);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(prams.api)
         const response = await fetch('api/' + prams.api, {
           method: 'GET',
           headers: {
@@ -32,6 +47,7 @@ const InstructionTable = (prams) => {
     "availability",
     "phoneNumber",
     "email",
+    "delete",
   ];
 
   const Header_Name = [
@@ -41,6 +57,7 @@ const InstructionTable = (prams) => {
     "Availability",
     "Phone Number",
     "Email",
+    "Delete",
   ];
 
   return (
@@ -54,7 +71,7 @@ const InstructionTable = (prams) => {
                 key={index}
                 className="py-2 px-4 border border-gray-300 text-center"
               >
-                {name}
+                {name === "Delete" ? "" : name}
               </th>
             ))}
           </tr>
@@ -67,7 +84,6 @@ const InstructionTable = (prams) => {
                   key={index}
                   className="py-2 px-4 border border-gray-300 text-center"
                 >
-                  {/* if row[name] is array  */}
                   {Array.isArray(row[name]) ? (
                     row[name].map((item, index) => (
                       <div key={index}>
@@ -76,6 +92,14 @@ const InstructionTable = (prams) => {
                     ))
                   ) : (
                     row[name]
+                  )}
+                  {name === "delete" && (
+                    <button
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
+                      onClick={() => handleDelete(row.name)}
+                    >
+                      Delete
+                    </button>
                   )}
                 </td>
               ))}

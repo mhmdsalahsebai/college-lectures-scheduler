@@ -50,11 +50,6 @@ const Sidebar = ({ setLogoutMessage }) => {
       link: "/Settings",
       label: "Settings",
     },
-    {
-      icon: <ExitToAppIcon style={{ fontSize: 24 }} />,
-      handleClick: handleLogout,
-      label: "Logout",
-    },
   ];
 
   return (
@@ -64,24 +59,18 @@ const Sidebar = ({ setLogoutMessage }) => {
     >
       <div className="flex flex-col justify-between h-full">
         <div className="flex flex-col gap-2">
-          {sidebarItems.slice(0, -1).map((item, index) => (
+          {sidebarItems.map((item, index) => (
             <div
               key={index}
               className="flex items-center rounded-lg transition-all p-2 duration-300 text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 "
               onClick={item.handleClick || (() => { })}
             >
-              {item.link ? (
-                <Link href={item.link}>
-                  <span className="mr-1">{item.icon}</span>
-                  <span className="hidden group-hover:inline-block">
-                    {item.label}
-                  </span>
-                </Link>
-              ) : (
-                <button className="hidden group-hover:inline-block focus:outline-none">
+              <Link href={item.link}>
+                <span className="mr-1">{item.icon}</span>
+                <span className="hidden group-hover:inline-block">
                   {item.label}
-                </button>
-              )}
+                </span>
+              </Link>
             </div>
           ))}
         </div>

@@ -120,7 +120,7 @@ export default function Page() {
             <div className="flex-1 p-2 text-white">
               <CustomTable selectedYear={selectedYear} selectedSemester={selectedSemester} />
               {logoutMessage && (
-                <div className="fixed bottom-8 left-3/4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
+                <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
                   {logoutMessage}
                 </div>
               )}

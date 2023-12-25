@@ -7,6 +7,7 @@ import TableToExcel from "@linways/table-to-excel";
 const CustomTable = ({ selectedYear, selectedSemester }) => {
   const [tableData, setTableData] = useState([[]]);
   const [prvData, setPrvData] = useState([]);
+  const [clearTable, setClearTable] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -87,9 +88,7 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
     setIsModalOpen(false);
   };
   const handleClear = () => {
-    if (!confirm("Are you sure you want to clear the table?")) {
-      return;
-    }
+    setClearTable(false);
     setTableData([[]]);
     handleSaveTable([[]]);
   };
@@ -200,8 +199,8 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
         Export to Excel
       </button>
       <button
-        onClick={handleClear}
-        className="fixed bottom-0 m-8 bg-red-500 hover:bg-red-700 text-white font-bold py-4 px-8 rounded"
+        onClick={() => setClearTable(true)}
+        className="fixed bottom-0 m-8 bg-gray-500 hover:bg-red-700 text-white font-bold py-4 px-8 rounded"
       >
         Clear Table
       </button>
@@ -215,8 +214,30 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
         selectedYear={selectedYear}
         selectedSemester={selectedSemester}
       />
+      <div>
+        {clearTable &&
+          <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white rounded-lg p-8 m-4 max-w-xs max-h-full text-center">
+              <h1 className="text-black text-2xl font-bold mb-8"> Are you sure you want to clear the table?</h1>
+              <button
+                onClick={() => setClearTable(false)}
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-4"
+              >
+                NO
+              </button>
+              <button
+                onClick={handleClear}
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              >
+                YES
+              </button>
+
+            </div>
+          </div>
+        }
+      </div>
     </div>
   );
-};
+}
 
 export default CustomTable;

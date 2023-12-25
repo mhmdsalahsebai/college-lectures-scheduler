@@ -240,11 +240,11 @@ const InfoForm = ({ selectedInstructor }) => {
         </button>
       </div>
       {status !== "" && (status === "Saved" ? (
-        <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
           {status}
         </div>
       ) : (
-        <div className="fixed bottom-4 right-4 p-4 bg-red-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 bg-red-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
           {status}
         </div>
       ))}

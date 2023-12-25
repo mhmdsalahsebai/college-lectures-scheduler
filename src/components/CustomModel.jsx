@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
-const CustomModel = ({ prvData , isOpen, onClose, onSave, onRemove, selectedYear, selectedSemester }) => {
+const CustomModel = ({ prvData, isOpen, onClose, onSave, onRemove, selectedYear, selectedSemester }) => {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [type, setType] = useState("lecture");
   const [room, setRoom] = useState("");
   const [subjectData, setSubjectData] = useState([]);
-
+  const [status, setStatus] = useState("");
+  if (status !== "") {
+    setTimeout(() => {
+      setStatus("");
+      console.log("status", status);
+    }, 1000);
+  }
   useEffect(() => {
     if (prvData && prvData.name) {
       setName(prvData.name);
@@ -59,8 +65,8 @@ const CustomModel = ({ prvData , isOpen, onClose, onSave, onRemove, selectedYear
 
 
   const handleSave = () => {
-    if (!name || !subject || !room) {
-      alert("Please fill all fields!");
+    if (name === "" || subject === "" || room === "") {
+      setStatus("Please fill all the fields");
       return;
     }
     onSave({ name, subject, type, room });
@@ -188,6 +194,11 @@ const CustomModel = ({ prvData , isOpen, onClose, onSave, onRemove, selectedYear
                 >
                   Remove
                 </button>
+              )}
+              {status !== "" && (
+                <div  className="fixed bottom-8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 bg-red-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
+                  {status}
+                </div>
               )}
             </div>
           </div>
