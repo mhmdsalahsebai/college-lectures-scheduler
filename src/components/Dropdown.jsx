@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
-import Select from "react-select";
 
-const Dropdown = ({ clearData }) => {
+const Dropdown = ({ clearData, selectedYear }) => {
   const [subjectData, setSubjectData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedsubject, setselectedsubject] = useState("");
+  const [selectedSubject, setSelectedSubject] = useState("");
 
   useEffect(() => {
     if (clearData) {
-      setselectedsubject("");
+      setSelectedSubject("");
       setSelectedCategory("");
       setSubjectData([]);
     }
@@ -20,7 +19,6 @@ const Dropdown = ({ clearData }) => {
         if (selectedCategory !== "") {
           const response = await fetch(`/${selectedCategory}.json`);
           const data = await response.json();
-
           setSubjectData(data);
         }
       } catch (error) {
@@ -30,40 +28,42 @@ const Dropdown = ({ clearData }) => {
 
     fetchData();
   }, [selectedCategory]);
+
   const handleSelectChange = (event) => {
-    // Update the state with the selected value
     setSelectedCategory(event.target.value);
   };
+
   const handleSelectChange2 = (event) => {
-    // Update the state with the selected value
-    setselectedsubject(event.target.value);
+    setSelectedSubject(event.target.value);
+  };
+
+  const generateYearOptions = () => {
+    const terms = ["1Term", "2Term"];
+    const options = [];
+
+    terms.forEach((term) => {
+      options.push(`${selectedYear}Year_${term}`);
+    });
+
+    return options;
   };
 
   return (
     <div>
-      <input
+      <select
         className="mt-1 w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
-        list="year"
         id="selectedCategory"
-        placeholder="select year and term:"
         name="selectedCategory"
         value={selectedCategory}
         onChange={handleSelectChange}
-      />
-
-      <datalist id="year">
-        <option value="">select year and term </option>
-        <option value="1Year_1Term">1Year_1Term</option>
-        <option value="1Year_2Term">1Year_2Term</option>
-        <option value="2Year_1Term">2Year_1Term</option>
-        <option value="2Year_2Term">2Year_2Term</option>
-        <option value="3Year_1Term">3Year_1Term</option>
-        <option value="3Year_2Term">3Year_2Term</option>
-        <option value="4Year_1Term">4Year_1Term</option>
-        <option value="4Year_2Term">4Year_2Term</option>
-        <option value="5Year_1Term">5Year_1Term</option>
-        <option value="5Year_2Term">5Year_2Term</option>
-      </datalist>
+      >
+        <option value="">Select year and term</option>
+        {generateYearOptions().map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
 
       <input
         className="mt-1 w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
@@ -71,7 +71,7 @@ const Dropdown = ({ clearData }) => {
         id="selectedSubject"
         placeholder="Choose a Subject"
         name="selectedSubject"
-        value={selectedsubject}
+        value={selectedSubject}
         onChange={handleSelectChange2}
       />
       <datalist id="subject">
@@ -81,7 +81,7 @@ const Dropdown = ({ clearData }) => {
           </option>
         ))}
       </datalist>
-    </div>
+      </div>
   );
 };
 

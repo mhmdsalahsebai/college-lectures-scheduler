@@ -96,7 +96,6 @@ export default function Page() {
                   {logoutMessage}
                 </div>
               )}
-
             </div>
           </main>
         </>

@@ -199,6 +199,7 @@ const CustomTable = ({ selectedYear }) => {
     cursor: 'pointer',       
   }}></button>
       <CustomModal
+      selectedYear={selectedYear}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         onSave={handleSave}
