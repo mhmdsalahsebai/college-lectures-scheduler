@@ -9,7 +9,6 @@ import Image from "next/image";
 import Login from "@/components/LogIn";
 import { useAuth } from "@/hooks/useAuth";
 
-
 export default function Page() {
   const [logoutMessage, setLogoutMessage] = useState("");
   const { isAuthorized, loading, handleAuthorization } = useAuth();
@@ -22,42 +21,39 @@ export default function Page() {
     }
   };
   const [theme, setTheme] = useState(() => {
-    return typeof window !== 'undefined' ? localStorage.getItem('theme') || 'light' : 'light';
+    return typeof window !== "undefined"
+      ? localStorage.getItem("theme") || "light"
+      : "light";
   });
   useEffect(() => {
     applyTheme(theme);
   }, [theme]);
 
   const applyTheme = (newTheme) => {
-    if (newTheme === 'dark') {
-      document.body.classList.add('dark-theme');
-      const container = document.getElementById('container');
+    if (newTheme === "dark") {
+      document.body.classList.add("dark-theme");
+      const container = document.getElementById("container");
       if (container) {
-        container.classList.add('dark-theme');
+        container.classList.add("dark-theme");
       }
-      const child = document.getElementById('child');
+      const child = document.getElementById("child");
       if (child) {
-        child.classList.add('dark-theme');
+        child.classList.add("dark-theme");
       }
     } else {
-      document.body.classList.remove('dark-theme');
-      const container = document.getElementById('container');
+      document.body.classList.remove("dark-theme");
+      const container = document.getElementById("container");
       if (container) {
-        container.classList.remove('dark-theme');
+        container.classList.remove("dark-theme");
       }
-      const child = document.getElementById('child');
+      const child = document.getElementById("child");
       if (child) {
-        child.classList.remove('dark-theme');
+        child.classList.remove("dark-theme");
       }
     }
   };
   const [selectedYear, setSelectedYear] = useState(0);
-  const list_year = [
-    "First Year",
-    "Second Year",
-    "Third Year",
-    "Fourth Year",
-  ]
+  const list_year = ["First Year", "Second Year", "Third Year", "Fourth Year"];
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-10">
@@ -67,7 +63,7 @@ export default function Page() {
           <div className="flex justify-center items-center bg-black dark:bg-gray-800 px-6 py-4 shadow-md w-full">
             <ul class="flex cursor-pointer">
               {list_year.map((year, index) => (
-                <li class="mr-10">
+                <li class="mr-10" key={year + index}>
                   {index === selectedYear ? (
                     <a
                       class="text-blue-200 border-b-2 border-blue-500 pb-2"
@@ -87,7 +83,7 @@ export default function Page() {
               ))}
             </ul>
           </div>
-          <main className="overflow-y-auto h-[83vh] flex-1 flex flex-row md:flex-row sm:flex-row">
+          <main className="overflow-y-auto h-[84vh] flex-1 flex flex-row md:flex-row sm:flex-row">
             <Sidebar className="h-full" setLogoutMessage={setLogoutMessage} />
             <div className="flex-1 p-2 text-white">
               <CustomTable selectedYear={selectedYear} />
@@ -128,8 +124,7 @@ export default function Page() {
             }}
           ></div>
         </>
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 }

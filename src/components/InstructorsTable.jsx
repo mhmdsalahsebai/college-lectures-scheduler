@@ -15,6 +15,7 @@ const InstructionTable = (prams) => {
         });
         const result = await response.json();
         if (result.data !== undefined) {
+          console.log('result', result.data);
           setTableData(result.data);
         }
       } catch (error) {
@@ -43,7 +44,7 @@ const InstructionTable = (prams) => {
   ];
 
   return (
-    <div className="container fixed px-4 ml-6 w-full"   >
+    <div className="container px-4 mt-10"   >
 
       <table className="w-full bg-white border m-auto border-gray-300 rounded-lg overflow-hidden">
         <thead className="bg-gray-800 text-white">
