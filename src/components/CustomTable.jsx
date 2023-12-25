@@ -8,6 +8,14 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
   const [tableData, setTableData] = useState([[]]);
   const [prvData, setPrvData] = useState([]);
   const [clearTable, setClearTable] = useState(false);
+  const [isModelOpen, setIsModelOpen] = useState(false);
+  const [modelData, setModelData] = useState({ row: 0, col: 0 });
+  const [status, setStatus] = useState("");
+  if (status !== "") {
+    setTimeout(() => {
+      setStatus("");
+    }, 1000);
+  }
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,8 +36,6 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
     fetchData();
   }, [selectedYear, selectedSemester]);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalData, setModalData] = useState({ row: 0, col: 0 });
 
   const days = [
     "Saturday",
@@ -52,40 +58,39 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
       return;
     }
     setPrvData(tableData[row] && tableData[row][col] ? tableData[row][col] : []);
-    setModalData({ row, col });
-    setIsModalOpen(true);
+    setModelData({ row, col });
+    setIsModelOpen(true);
   };
 
   const handleSave = (data) => {
+    if (data.name === "" || data.subject === "" || data.room === "") {
+      setStatus("Please fill all the fields");
+      return;
+    }
     const updatedData = [...tableData];
-    const { row, col } = modalData;
-
-    // Ensure the table structure is properly initialized
+    const { row, col } = modelData;
     if (!updatedData[row]) {
       updatedData[row] = [];
     }
-
     updatedData[row][col] = {
       name: data.name,
       subject: data.subject,
       room: data.room,
       type: data.type,
     };
-    setTableData(updatedData);
-    setIsModalOpen(false);
     handleSaveTable(updatedData);
   };
 
   const handleRemove = () => {
     const updatedData = [...tableData];
-    const { row, col } = modalData;
+    const { row, col } = modelData;
 
     if (updatedData[row] && updatedData[row][col]) {
-      updatedData[row][col] = " ";
+      updatedData[row] = [];
       setTableData(updatedData);
       handleSaveTable(updatedData);
     }
-    setIsModalOpen(false);
+    setIsModelOpen(false);
   };
   const handleClear = () => {
     setClearTable(false);
@@ -103,10 +108,19 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
         },
         body: JSON.stringify(updatedData),
       });
-      if (response.ok) {
-        console.log("Data saved successfully");
-      } else {
-        console.error("Error saving data");
+      const result = await response.json();
+      if (result.success) {
+        setTableData(updatedData);
+        setIsModelOpen(false);
+      }
+      else {
+        const { row, col } = modelData;
+        updatedData[row][col].name = prvData.name;
+        updatedData[row][col].subject = prvData.subject;
+        updatedData[row][col].room = prvData.room;
+        updatedData[row][col].type = prvData.type;
+        setTableData(updatedData);
+        setStatus(result.message);
       }
     } catch (error) {
       console.error("Error saving :", error);
@@ -207,8 +221,8 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
 
       <CustomModel
         prvData={prvData}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isModelOpen}
+        onClose={() => setIsModelOpen(false)}
         onSave={handleSave}
         onRemove={handleRemove}
         selectedYear={selectedYear}
@@ -236,6 +250,11 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
           </div>
         }
       </div>
+      {status !== "" && (
+        <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 bg-red-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
+          {status}
+        </div>
+      )}
     </div>
   );
 }

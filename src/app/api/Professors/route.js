@@ -44,13 +44,8 @@ export async function DELETE(request) {
     const filePath = path.join(process.cwd(), "data/professors", name + ".json");
     try {
         fs.unlinkSync(filePath);
-        const fileNames = fs.readdirSync(path.join(process.cwd(), "data/professors"));
-        const data = fileNames.map((fileName) => {
-            const fileContent = fs.readFileSync(path.join(filePath, fileName), "utf8");
-            return JSON.parse(fileContent);
-        });
         return NextResponse.json(
-            { data },
+            { success: true },
             { status: 200, headers: { "content-type": "application/json" } }
         );
     }

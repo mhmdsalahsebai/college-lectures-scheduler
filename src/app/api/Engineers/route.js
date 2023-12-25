@@ -5,9 +5,8 @@ import fs from "fs";
 export async function POST(request) {
     const jsonData = await request.json();
     const { name } = jsonData;
-    const filePath = path.join(process.cwd(), "data/engineers", name +".json");
-
-    try {   
+    const filePath = path.join(process.cwd(), "data/engineers", name + ".json");
+    try {
         if (!fs.existsSync(path.join(process.cwd(), "data/engineers"))) {
             fs.mkdirSync(path.join(process.cwd(), "data/engineers"));
         }
@@ -31,8 +30,6 @@ export async function GET() {
         );
     }
     const fileNames = fs.readdirSync(filePath);
-
-
     const data = fileNames.map((fileName) => {
         const fileContent = fs.readFileSync(path.join(filePath, fileName), "utf8");
         return JSON.parse(fileContent);
@@ -47,13 +44,8 @@ export async function DELETE(request) {
     const filePath = path.join(process.cwd(), "data/engineers", name + ".json");
     try {
         fs.unlinkSync(filePath);
-        const fileNames = fs.readdirSync(path.join(process.cwd(), "data/engineers"));
-        const data = fileNames.map((fileName) => {
-            const fileContent = fs.readFileSync(path.join(filePath, fileName), "utf8");
-            return JSON.parse(fileContent);
-        });
         return NextResponse.json(
-            { data },
+            { success: true },
             { status: 200, headers: { "content-type": "application/json" } }
         );
     }

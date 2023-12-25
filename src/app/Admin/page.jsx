@@ -7,7 +7,7 @@ export default function Page() {
   const [selectedInstructor, setSelectedInstructor] = useState("Professor");
   const list_Instructor = [
     "Professor",
-    "Engineer",
+    "Teaching Assistant",
   ]
   return (
     <main className="flex-1 h-screen">
@@ -35,7 +35,7 @@ export default function Page() {
         </ul>
       </div>
       <div >
-        <h1 className="flex  text-3xl font-bold mb-6 pt-6 justify-center ">{selectedInstructor} form</h1>
+        <h1 className="flex  text-3xl font-bold mb-6 pt-6 justify-center ">{selectedInstructor} Form</h1>
         <InfoForm selectedInstructor={selectedInstructor} />
       </div>
     </main >

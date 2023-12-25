@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "react-select";
 
 const InfoForm = ({ selectedInstructor }) => {
   const [status, setStatus] = useState("");
+  const [subjectData, setSubjectData] = useState([]);
   if (status !== "") {
     setTimeout(() => {
       setStatus("");
@@ -25,38 +26,13 @@ const InfoForm = ({ selectedInstructor }) => {
     { value: "Thursday", label: "Thursday" },
   ];
 
-  const courseCodeOptions = [
-    { value: "CCE427", label: "CCE427" },
-    { value: "CCE428", label: "CCE428" },
-    { value: "CCE429", label: "CCE429" },
-    { value: "CCE430", label: "CCE430" },
-    { value: "CCE431", label: "CCE431" },
-    { value: "CCE432", label: "CCE432" },
-    { value: "CCE433", label: "CCE433" },
-    { value: "CCE434", label: "CCE434" },
-    { value: "CCE435", label: "CCE435" },
-    { value: "CCE437", label: "CCE437" },
-  ];
 
-  const courseOptions = [
-    { value: "تصميم تطبيقات الويب", label: "تصميم تطبيقات الويب" },
-    { value: "المعالجات المتوازية", label: "المعالجات المتوازية" },
-    { value: "نظم تحكم", label: "نظم تحكم" },
-    { value: "مقرر اختياري (3)", label: "مقرر اختياري (3)" },
-    { value: "مقرر اختياري (4)", label: "مقرر اختياري (4)" },
-    { value: "إبتكار وريادة اعمال", label: "إبتكار وريادة اعمال" },
-    { value: "معمل معالجة الصور الرقمية", label: "معمل معالجة الصور الرقمية" },
-    { value: "شبكات الحاسبات اللاسلكية", label: "شبكات الحاسبات اللاسلكية" },
-    { value: "نظم الروبوت", label: "نظم الروبوت" },
-    { value: "الذكاء الاصطناعى", label: "الذكاء الاصطناعى" },
-    { value: "مقرر اختياري (5)", label: "مقرر اختياري (5)" },
-    { value: "مقرر اختياري (6)", label: "مقرر اختياري (6)" },
-  ];
 
   const handleCourseCodeChange = (selectedOptions) => {
     setInstructorsInfo((prevInfo) => ({
       ...prevInfo,
       courseCode: selectedOptions.map((option) => option.value),
+      course: selectedOptions.map((option) => option.label),
     }));
   };
 
@@ -64,12 +40,12 @@ const InfoForm = ({ selectedInstructor }) => {
     setInstructorsInfo((prevInfo) => ({
       ...prevInfo,
       course: selectedOptions.map((option) => option.value),
+      courseCode: selectedOptions.map((option) => option.label),
     }));
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    // Enforce only numbers and the "+" sign for phone number
     const sanitizedValue =
       name === "phoneNumber" ? value.replace(/[^0-9+]/g, "") : value;
     setInstructorsInfo({ ...instructorsInfo, [name]: sanitizedValue });
@@ -81,7 +57,34 @@ const InfoForm = ({ selectedInstructor }) => {
       availability: selectedOptions.map((option) => option.value),
     }));
   };
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("api/tablesData?id=" + "courses", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const result = await response.json();
+        if (result.data !== undefined) {
+          setSubjectData(result.data);
+        }
+      }
+      catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+  const optionsSubject = subjectData.map((item) => ({
+    value: item["Subject code"],
+    label: item["Subject name"],
+  }));
+  const optionsSubjectCode = subjectData.map((item) => ({
+    value: item["Subject name"],
+    label: item["Subject code"],
+  }));
   const handleSubmit = async (e) => {
     e.preventDefault();
     for (const [key, value] of Object.entries(instructorsInfo)) {
@@ -91,7 +94,8 @@ const InfoForm = ({ selectedInstructor }) => {
       }
     }
     try {
-      const response = await fetch("/api/" + selectedInstructor + "s", {
+      const api = (selectedInstructor == "Professor" ? "Professors" : "Engineers");
+      const response = await fetch("/api/" + api, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +123,7 @@ const InfoForm = ({ selectedInstructor }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-3/4 mx-auto px-6 py-6 bg-white shadow-md rounded-md h-full "
+      className="w-3/4 mx-auto px-6 py-6 bg-white shadow-md rounded-md h-full overflow-y-scroll max-h-[550px]"
     >
       <div className="flex mb-4">
         <div className="w-1/2 mr-2">
@@ -205,10 +209,11 @@ const InfoForm = ({ selectedInstructor }) => {
           <Select
             className="text-black"
             isMulti
-            options={courseOptions}
-            value={courseOptions.filter((option) =>
+            options={optionsSubject}
+            value={optionsSubject.filter((option) =>
               instructorsInfo.course.includes(option.value)
             )}
+
             onChange={handleCourseChange}
           />
         </div>
@@ -223,8 +228,8 @@ const InfoForm = ({ selectedInstructor }) => {
           <Select
             className="text-black"
             isMulti
-            options={courseCodeOptions}
-            value={courseCodeOptions.filter((option) =>
+            options={optionsSubjectCode}
+            value={optionsSubjectCode.filter((option) =>
               instructorsInfo.courseCode.includes(option.value)
             )}
             onChange={handleCourseCodeChange}
