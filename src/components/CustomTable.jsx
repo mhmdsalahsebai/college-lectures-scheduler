@@ -86,7 +86,7 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
     const { row, col } = modelData;
 
     if (updatedData[row] && updatedData[row][col]) {
-      updatedData[row][col] = [];
+      updatedData[row][col] = null;
       setTableData(updatedData);
       handleSaveTable(updatedData);
     }
