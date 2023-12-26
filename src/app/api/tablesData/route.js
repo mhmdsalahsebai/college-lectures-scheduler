@@ -18,7 +18,7 @@ export async function POST(request) {
         const fileNames = fs.readdirSync(folderPath).filter((fileName) => {
             return fileName.endsWith(id[1] + "_data.json") && !fileName.endsWith(id + "_data.json")
         });
-        var duplicate = false;
+        var duplicate = null;
         fileNames.map((fileName) => {
             const fileContent = JSON.parse(fs.readFileSync(path.join(folderPath, fileName), "utf8"));
             if (fileContent !== null && jsonData !== null)
@@ -26,7 +26,10 @@ export async function POST(request) {
                     if (fileContent[i] !== null && jsonData[i] !== null)
                         for (let j = 0; j < fileContent[i].length && j < jsonData[i].length && !duplicate; j++) {
                             if (fileContent[i][j] && jsonData[i][j] && fileContent[i][j].name === jsonData[i][j].name) {
-                                duplicate = true;
+                                duplicate = "The Instructor is busy at this time";
+                            }
+                            else if (fileContent[i][j] && jsonData[i][j] && fileContent[i][j].room === jsonData[i][j].room) {
+                                duplicate = "The Room is busy at this time";
                             }
                         }
                 }
@@ -40,7 +43,7 @@ export async function POST(request) {
         }
         else {
             return NextResponse.json(
-                { success: false  , message: "The Instructor is busy at this time"},
+                { success: false  , message: duplicate},
                 { status: 200, headers: { "content-type": "application/json" } }
             );
 
