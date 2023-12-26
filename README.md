@@ -1,40 +1,48 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# College Lectures Scheduler
+
+## Description
+The College Lectures Scheduler is a web application designed to facilitate the creation of schedules for college lectures. This project helps streamline the process of organizing and managing lecture timetables efficiently. Users can easily create, view, and modify schedules, ensuring that there are no conflicts in instructor availability or room bookings.
+
+## Features
+
+### Lecture Schedule Table
+The heart of the application is the interactive schedule table. Users can easily visualize and plan lectures based on various parameters such as time, room, and instructor availability. The schedule table also includes features to prevent scheduling conflicts, ensuring the integrity of the timetable.
+
+### Conflict Prevention
+To enhance the scheduling process, the application incorporates conflict prevention measures. For instance, the system prevents the addition of an instructor to a lecture if they are already scheduled for another lecture at the same time. Additionally, it checks for conflicts in room availability to avoid double bookings.
+
+### Admin Panel
+The admin panel provides a centralized location for administrators to manage information about instructors. Admins can add, edit, or remove details related to instructors, ensuring that the system stays up-to-date with the latest faculty information.
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+- Node.js
+- Next.js
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Installation
+1. Clone the repository.
+   ```bash
+   git clone https://github.com/mhmdsalahsebai/college-lectures-scheduler.git
+   ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Navigate to the project directory.
+   ```bash
+   cd college-lectures-scheduler
+   ```
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+3. Install dependencies.
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+5. Run the application.
+   ```bash
+   npm start
+   ```
 
-## Learn More
+6. Access the application in your web browser at `http://localhost:3000`.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
-
-# college-lectures-scheduler
-
-Hello World
+## Acknowledgments
+- Special thanks to the contributors and supporters of the College Lectures Scheduler project.
+- Inspired by the need for an efficient and user-friendly solution for college lecture scheduling.

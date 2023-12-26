@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-const InstructionTable = (prams) => {
+const InstructionTable = ({api}) => {
   const [tableData, setTableData] = useState([[]]);
   const [deleteStatus, setDeleteStatus] = useState(false);
   const handleDelete = async (name) => {
     try {
-      const response = await fetch("api/" + prams.api, {
+      const response = await fetch("api/" + api, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
