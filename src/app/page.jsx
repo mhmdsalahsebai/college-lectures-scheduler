@@ -9,7 +9,6 @@ import Image from "next/image";
 import Login from "@/components/LogIn";
 import { useAuth } from "@/hooks/useAuth";
 
-
 export default function Page() {
   const [logoutMessage, setLogoutMessage] = useState("");
   const { isAuthorized, loading, handleAuthorization } = useAuth();
@@ -22,47 +21,41 @@ export default function Page() {
     }
   };
   const [theme, setTheme] = useState(() => {
-    return typeof window !== 'undefined' ? localStorage.getItem('theme') || 'light' : 'light';
+    return typeof window !== "undefined"
+      ? localStorage.getItem("theme") || "light"
+      : "light";
   });
   useEffect(() => {
     applyTheme(theme);
   }, [theme]);
 
   const applyTheme = (newTheme) => {
-    if (newTheme === 'dark') {
-      document.body.classList.add('dark-theme');
-      const container = document.getElementById('container');
+    if (newTheme === "dark") {
+      document.body.classList.add("dark-theme");
+      const container = document.getElementById("container");
       if (container) {
-        container.classList.add('dark-theme');
+        container.classList.add("dark-theme");
       }
-      const child = document.getElementById('child');
+      const child = document.getElementById("child");
       if (child) {
-        child.classList.add('dark-theme');
+        child.classList.add("dark-theme");
       }
     } else {
-      document.body.classList.remove('dark-theme');
-      const container = document.getElementById('container');
+      document.body.classList.remove("dark-theme");
+      const container = document.getElementById("container");
       if (container) {
-        container.classList.remove('dark-theme');
+        container.classList.remove("dark-theme");
       }
-      const child = document.getElementById('child');
+      const child = document.getElementById("child");
       if (child) {
-        child.classList.remove('dark-theme');
+        child.classList.remove("dark-theme");
       }
     }
   };
   const [selectedYear, setSelectedYear] = useState(0);
   const [selectedSemester, setSelectedSemester] = useState(0);
-  const list_year = [
-    "First Year",
-    "Second Year",
-    "Third Year",
-    "Fourth Year",
-  ]
-  const list_semester = [
-    "First Semester",
-    "Second Semester",
-  ]
+  const list_year = ["First Year", "Second Year", "Third Year", "Fourth Year"];
+  const list_semester = ["First Semester", "Second Semester"];
 
   return (
     <div className="flex">
@@ -72,59 +65,59 @@ export default function Page() {
           <Sidebar setLogoutMessage={setLogoutMessage} />
           <main className="overflow-y-auto w-screen md:flex-row sm:flex-row">
             <div className="flex  pt-20  justify-center items-center bg-white dark:bg-gray-800 px-6 py-4 shadow-md w-full">
-              <ul class="flex cursor-pointer ml-10 pd-10">
+              <ul className="flex cursor-pointer ml-10 pd-10">
                 {list_year.map((year, index) => (
-                  <li class="mr-10">
+                  <li key={year + index} className="mr-10">
                     {index === selectedYear ? (
                       <a
-                        class="text-blue-200 border-b-2 border-blue-500 pb-2"
+                        className="text-blue-200 border-b-2 border-blue-500 pb-2"
                         onClick={() => setSelectedYear(index)}
                       >
                         {year}
                       </a>
                     ) : (
                       <a
-                        class="text-gray-200 hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 pb-2"
+                        className="text-gray-200 hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 pb-2"
                         onClick={() => setSelectedYear(index)}
                       >
                         {year}
                       </a>
                     )}
                   </li>
-
                 ))}
               </ul>
-              <ul class="flex cursor-pointer ml-10 pd-10">
+              <ul className="flex cursor-pointer ml-10 pd-10">
                 {list_semester.map((semester, index) => (
-                  <li class="mr-10">
+                  <li key={semester + index} className="mr-10">
                     {index === selectedSemester ? (
                       <a
-                        class="text-green-200 border-b-2 border-green-500 pb-2"
+                        className="text-green-200 border-b-2 border-green-500 pb-2"
                         onClick={() => setSelectedSemester(index)}
                       >
                         {semester}
                       </a>
                     ) : (
                       <a
-                        class="text-gray-200 hover:text-green-500 border-b-2 border-transparent hover:border-green-500 pb-2"
+                        className="text-gray-200 hover:text-green-500 border-b-2 border-transparent hover:border-green-500 pb-2"
                         onClick={() => setSelectedSemester(index)}
                       >
                         {semester}
                       </a>
                     )}
                   </li>
-
                 ))}
               </ul>
             </div>
             <div className="flex-1 p-2 text-white">
-              <CustomTable selectedYear={selectedYear} selectedSemester={selectedSemester} />
+              <CustomTable
+                selectedYear={selectedYear}
+                selectedSemester={selectedSemester}
+              />
               {logoutMessage && (
                 <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
                   {logoutMessage}
                 </div>
               )}
-
             </div>
           </main>
         </>
@@ -157,8 +150,7 @@ export default function Page() {
             }}
           ></div>
         </>
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 }
