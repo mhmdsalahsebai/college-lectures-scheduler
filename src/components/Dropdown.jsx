@@ -5,7 +5,7 @@ const Dropdown = ({ clearData, selectedYear }) => {
   const [subjectData, setSubjectData] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedSubject, setSelectedSubject] = useState("");
-
+  console.log("subjectData", subjectData);
   useEffect(() => {
     if (clearData) {
       setSelectedSubject("");
@@ -48,9 +48,8 @@ const Dropdown = ({ clearData, selectedYear }) => {
   };
 
   const handleSelectChange2 = (selectedOption) => {
-    setselectedsubject(selectedOption.label);
+    setSelectedSubject(selectedOption.label);
   };
-
   return (
     <div>
       <label>
@@ -74,7 +73,7 @@ const Dropdown = ({ clearData, selectedYear }) => {
           value: subject["Subject code"],
           label: subject["Subject name"],
         }))}
-        value={options.find((option) => option.label === selectedsubject)}
+        value={options.find((option) => option.label === selectedSubject)}
         onChange={handleSelectChange2}
       />
     </div>

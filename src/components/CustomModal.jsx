@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Dropdown from "./Dropdown";
 import Staff from "./staff";
 
-const CustomModal = ({ isOpen,selectedYear, onClose, onSave, onRemove }) => {
+const CustomModal = ({ isOpen, selectedYear, onClose, onSave, onRemove }) => {
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [type, setType] = useState("lecture");
@@ -43,12 +43,6 @@ const CustomModal = ({ isOpen,selectedYear, onClose, onSave, onRemove }) => {
             <Staff clearData={clearData} />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="subject"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Subject:
-            </label>
             <Dropdown selectedYear={selectedYear} clearData={clearData} />
           </div>
           <div className="mb-4">
