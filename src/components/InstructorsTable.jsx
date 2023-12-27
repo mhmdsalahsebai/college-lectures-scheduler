@@ -23,7 +23,7 @@ const InstructionTable = ({api}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('api/' + prams.api, {
+        const response = await fetch('api/' + api, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
