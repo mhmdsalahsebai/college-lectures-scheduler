@@ -1,9 +1,13 @@
 import InstructorsTable from "@/components/InstructorsTable";
 export default function Page() {
   return (
-    <div className="flex-1">
-      <h1 className="text-3xl pl-4 pt-14 font-bold text-start w-full m-6">Professors</h1>
-      <InstructorsTable api="Professors" />
+    <div className="flex-1 px-4 w-full">
+      <h1 className="flex flex-row justify-center text-3xl pt-14 font-bold text-center text-start ml-6 mt-6 mr-6">
+        Professors
+      </h1>
+      <div className="flex flex-row justify-center">
+        <InstructorsTable api="Professors" />
+      </div>
     </div>
   );
 }

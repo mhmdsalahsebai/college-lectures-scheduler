@@ -68,7 +68,7 @@ const Login = ({ handleAuthorization }) => {
               placeholder="Enter username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              className="mt-1 text-sm p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
+              className="mt-1 text-gray-700 text-sm p-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
             />
           </div>
 
@@ -85,7 +85,7 @@ const Login = ({ handleAuthorization }) => {
               placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="mt-1 p-2 w-full text-sm border rounded-md focus:outline-none focus:border-blue-500"
+              className="mt-1 text-gray-700 p-2 w-full text-sm border rounded-md focus:outline-none focus:border-blue-500"
             />
           </div>
 
