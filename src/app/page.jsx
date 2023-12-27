@@ -53,7 +53,17 @@ export default function Page() {
     }
   };
   const [selectedYear, setSelectedYear] = useState(0);
-  const list_year = ["First Year", "Second Year", "Third Year", "Fourth Year"];
+  const [selectedSemester, setSelectedSemester] = useState(0);
+  const list_year = [
+    "First Year",
+    "Second Year",
+    "Third Year",
+    "Fourth Year",
+  ]
+  const list_semester = [
+    "First Semester",
+    "Second Semester",
+  ]
 
   return (
     <div className="fixed top-0 left-0 w-full h-full z-10">
@@ -82,6 +92,28 @@ export default function Page() {
                 </li>
               ))}
             </ul>
+            <ul class="flex cursor-pointer ml-10 pd-10">
+                {list_semester.map((semester, index) => (
+                  <li class="mr-10">
+                    {index === selectedSemester ? (
+                      <a
+                        class="text-green-200 border-b-2 border-green-500 pb-2"
+                        onClick={() => setSelectedSemester(index)}
+                      >
+                        {semester}
+                      </a>
+                    ) : (
+                      <a
+                        class="text-gray-200 hover:text-green-500 border-b-2 border-transparent hover:border-green-500 pb-2"
+                        onClick={() => setSelectedSemester(index)}
+                      >
+                        {semester}
+                      </a>
+                    )}
+                  </li>
+
+                ))}
+              </ul>
           </div>
           <main className="overflow-y-auto h-[84vh] flex-1 flex flex-row md:flex-row sm:flex-row">
             <Sidebar className="h-full" setLogoutMessage={setLogoutMessage} />
