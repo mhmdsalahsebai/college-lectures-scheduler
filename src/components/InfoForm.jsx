@@ -123,7 +123,7 @@ const InfoForm = ({ selectedInstructor }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-3/4 mx-auto px-6 py-6 bg-white shadow-md rounded-md h-full overflow-y-scroll max-h-[550px]"
+      className="w-3/4 mx-auto px-6 py-6 bg-white shadow-md rounded-md h-full scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100"
     >
       <div className="flex mb-4">
         <div className="w-1/2 mr-2">
@@ -139,7 +139,7 @@ const InfoForm = ({ selectedInstructor }) => {
             name="name"
             value={instructorsInfo.name}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full text-gray-700 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
 
@@ -156,7 +156,7 @@ const InfoForm = ({ selectedInstructor }) => {
             name="email"
             value={instructorsInfo.email}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full text-gray-700 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
       </div>
@@ -175,7 +175,7 @@ const InfoForm = ({ selectedInstructor }) => {
             name="phoneNumber"
             value={instructorsInfo.phoneNumber}
             onChange={handleInputChange}
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
+            className="w-full text-gray-700 px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"
           />
         </div>
 
@@ -187,7 +187,7 @@ const InfoForm = ({ selectedInstructor }) => {
             Availability Days
           </label>
           <Select
-            className="text-black"
+            className="text-gray-700"
             isMulti
             options={daysOptions}
             value={daysOptions.filter((option) =>
@@ -207,7 +207,7 @@ const InfoForm = ({ selectedInstructor }) => {
             Course Name
           </label>
           <Select
-            className="text-black"
+            className="text-gray-700"
             isMulti
             options={optionsSubject}
             value={optionsSubject.filter((option) =>
@@ -226,7 +226,7 @@ const InfoForm = ({ selectedInstructor }) => {
             Course Code
           </label>
           <Select
-            className="text-black"
+            className="text-gray-700"
             isMulti
             options={optionsSubjectCode}
             value={optionsSubjectCode.filter((option) =>
@@ -239,7 +239,7 @@ const InfoForm = ({ selectedInstructor }) => {
       <div className="flex justify-center pt-10">
         <button
           type="submit"
-          className="w-5/12 justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          className="w-5/12 justify-center bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline"
         >
           Add
         </button>

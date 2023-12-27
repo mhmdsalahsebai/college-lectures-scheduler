@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from "react";
 import CustomModel from "./CustomModel";
 import TableToExcel from "@linways/table-to-excel";
+import DownloadIcon from '@mui/icons-material/Download';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
 const CustomTable = ({ selectedYear, selectedSemester }) => {
@@ -208,15 +210,17 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
       <button
         id="button-excel"
         onClick={handleButtonClick}
-        className="fixed bottom-0 right-0 m-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded"
+        className="fixed bottom-0 right-0 m-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg"
       >
-        Export to Excel
+        <DownloadIcon style={{ fontSize: 24 }} />
+        Export
       </button>
       <button
         onClick={() => setClearTable(true)}
-        className="fixed bottom-0 m-8 bg-gray-500 hover:bg-red-700 text-white font-bold py-4 px-8 rounded"
+        className="fixed bottom-0 m-8 bg-gray-500 hover:bg-red-700 text-white font-bold py-3 px-4 rounded-lg"
       >
-        Clear Table
+        <DeleteIcon style={{ fontSize: 24 }} />
+        Clear
       </button>
 
       <CustomModel

@@ -37,19 +37,19 @@ export default function RootLayout({ children }) {
     }
   };
   return (
-    <div >
-      <Navbar />
-      <div className="flex">
-        <Sidebar className="h-full" setLogoutMessage={setLogoutMessage} />
-        <div>
-          {children}
-          {logoutMessage && (
-            <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
-              {logoutMessage}
+        <div className="flex flex-col w-screen">
+          <Navbar />
+          <div className="flex">
+            <Sidebar className="h-full" setLogoutMessage={setLogoutMessage} />
+            <div className="w-full">
+              {children}
+              {logoutMessage && (
+                <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-lg transition-opacity duration-300 opacity-80">
+                  {logoutMessage}
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
-      </div>
-    </div>
   );
 }

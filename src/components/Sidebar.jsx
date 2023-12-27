@@ -50,6 +50,7 @@ const Sidebar = ({ setLogoutMessage }) => {
       link: "/Settings",
       label: "Settings",
     },
+    
   ];
 
   return (

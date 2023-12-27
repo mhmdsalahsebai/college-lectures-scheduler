@@ -146,7 +146,7 @@ export default function Page() {
       ) : (
         <>
           <NavbarLogin />
-          <h1 className="flex text-2xl font-medium items-center text-white justify-center">
+          <h1 className="flex text-2xl font-medium items-center text-center text-white justify-center">
             Loading ...
           </h1>
           <div
