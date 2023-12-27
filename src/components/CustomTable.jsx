@@ -259,13 +259,13 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
               </h1>
               <button
                 onClick={() => setClearTable(false)}
-                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-4"
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg mr-4"
               >
                 NO
               </button>
               <button
                 onClick={handleClear}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg"
               >
                 YES
               </button>
