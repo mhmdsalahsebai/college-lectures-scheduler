@@ -58,7 +58,8 @@ export default function Page() {
   const list_semester = ["First Semester", "Second Semester"];
 
   return (
-    <div className="flex">
+    <div className="fixed w-full">
+    <div className="flex flex-row">
       {isAuthorized ? (
         <>
           <Navbar className="flex-1" />
@@ -139,7 +140,7 @@ export default function Page() {
       ) : (
         <>
           <NavbarLogin />
-          <h1 className="flex text-2xl font-medium items-center text-white justify-center">
+          <h1 className="flex flex-col text-2xl font-medium items-center text-white justify-center w-screen h-screen">
             Loading ...
           </h1>
           <div
@@ -151,6 +152,7 @@ export default function Page() {
           ></div>
         </>
       )}
+    </div>
     </div>
   );
 }
