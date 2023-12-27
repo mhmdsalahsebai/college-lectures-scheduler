@@ -9,7 +9,6 @@ import Image from "next/image";
 import Login from "@/components/LogIn";
 import { useAuth } from "@/hooks/useAuth";
 
-
 export default function Page() {
   const [logoutMessage, setLogoutMessage] = useState("");
   const { isAuthorized, loading, handleAuthorization } = useAuth();
@@ -22,32 +21,34 @@ export default function Page() {
     }
   };
   const [theme, setTheme] = useState(() => {
-    return typeof window !== 'undefined' ? localStorage.getItem('theme') || 'light' : 'light';
+    return typeof window !== "undefined"
+      ? localStorage.getItem("theme") || "light"
+      : "light";
   });
   useEffect(() => {
     applyTheme(theme);
   }, [theme]);
 
   const applyTheme = (newTheme) => {
-    if (newTheme === 'dark') {
-      document.body.classList.add('dark-theme');
-      const container = document.getElementById('container');
+    if (newTheme === "dark") {
+      document.body.classList.add("dark-theme");
+      const container = document.getElementById("container");
       if (container) {
-        container.classList.add('dark-theme');
+        container.classList.add("dark-theme");
       }
-      const child = document.getElementById('child');
+      const child = document.getElementById("child");
       if (child) {
-        child.classList.add('dark-theme');
+        child.classList.add("dark-theme");
       }
     } else {
-      document.body.classList.remove('dark-theme');
-      const container = document.getElementById('container');
+      document.body.classList.remove("dark-theme");
+      const container = document.getElementById("container");
       if (container) {
-        container.classList.remove('dark-theme');
+        container.classList.remove("dark-theme");
       }
-      const child = document.getElementById('child');
+      const child = document.getElementById("child");
       if (child) {
-        child.classList.remove('dark-theme');
+        child.classList.remove("dark-theme");
       }
     }
   };
@@ -72,7 +73,7 @@ export default function Page() {
           <div className="flex justify-center items-center bg-black dark:bg-gray-800 px-6 py-4 shadow-md w-full">
             <ul class="flex cursor-pointer">
               {list_year.map((year, index) => (
-                <li class="mr-10">
+                <li class="mr-10" key={year + index}>
                   {index === selectedYear ? (
                     <a
                       class="text-blue-200 border-b-2 border-blue-500 pb-2"
@@ -123,7 +124,6 @@ export default function Page() {
                   {logoutMessage}
                 </div>
               )}
-
             </div>
           </main>
         </>
@@ -156,8 +156,7 @@ export default function Page() {
             }}
           ></div>
         </>
-      )
-      }
-    </div >
+      )}
+    </div>
   );
 }
