@@ -1,6 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import CustomModel from "./CustomModel";
+import DownloadIcon from '@mui/icons-material/Download';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const CustomTable = ({ selectedYear, selectedSemester }) => {
   const [tableData, setTableData] = useState([[]]);
@@ -218,20 +220,26 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
           ))}
         </tbody>
       </table>
+      <div className="fixed bottom-0 m-8"> 
       <button
         id="button-excel"
         onClick={handleButtonClick}
-        className="fixed bottom-0 right-0 m-8 bg-blue-500 hover:bg-blue-700 text-white font-bold py-4 px-8 rounded"
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 pl-2 pr-4 rounded-lg"
       >
-        Export to Excel
+        <DownloadIcon className="mr-2" />
+        Export
       </button>
+      </div>
+
+      <div className="fixed bottom-0 right-0 m-8"> 
       <button
         onClick={() => setClearTable(true)}
-        className="fixed bottom-0 m-8 bg-gray-500 hover:bg-red-700 text-white font-bold py-4 px-8 rounded"
+        className="flex justify-between bg-gray-500 hover:bg-red-700 text-white font-bold py-2 pl-2 pr-4 rounded-lg"
       >
-        Clear Table
+        <DeleteIcon className="mr-2" />
+        Clear
       </button>
-
+      </div>
       <CustomModel
         prvData={prvData}
         isOpen={isModelOpen}
@@ -251,13 +259,13 @@ const CustomTable = ({ selectedYear, selectedSemester }) => {
               </h1>
               <button
                 onClick={() => setClearTable(false)}
-                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded mr-4"
+                className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-lg mr-4"
               >
                 NO
               </button>
               <button
                 onClick={handleClear}
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-lg"
               >
                 YES
               </button>

@@ -58,26 +58,28 @@ export default function Page() {
   const list_semester = ["First Semester", "Second Semester"];
 
   return (
-    <div className="flex">
+    <div className="fixed w-full">
+    <div className="flex flex-row">
       {isAuthorized ? (
         <>
           <Navbar className="flex-1" />
           <Sidebar setLogoutMessage={setLogoutMessage} />
           <main className="overflow-y-auto w-screen md:flex-row sm:flex-row">
             <div className="flex  pt-20  justify-center items-center bg-white dark:bg-gray-800 px-6 py-4 shadow-md w-full">
+              <div className="mr-10">
               <ul className="flex cursor-pointer ml-10 pd-10">
                 {list_year.map((year, index) => (
                   <li key={year + index} className="mr-10">
                     {index === selectedYear ? (
                       <a
-                        className="text-blue-200 border-b-2 border-blue-500 pb-2"
+                        className="text-white bg-blue-900 p-2 rounded-lg"
                         onClick={() => setSelectedYear(index)}
                       >
                         {year}
                       </a>
                     ) : (
                       <a
-                        className="text-gray-200 hover:text-blue-500 border-b-2 border-transparent hover:border-blue-500 pb-2"
+                        className="text-gray-200 hover:text-blue-500 border-transparent hover:border-blue-500 pb-2"
                         onClick={() => setSelectedYear(index)}
                       >
                         {year}
@@ -86,19 +88,21 @@ export default function Page() {
                   </li>
                 ))}
               </ul>
+              </div>
+              <div className="ml-10">
               <ul className="flex cursor-pointer ml-10 pd-10">
                 {list_semester.map((semester, index) => (
                   <li key={semester + index} className="mr-10">
                     {index === selectedSemester ? (
                       <a
-                        className="text-green-200 border-b-2 border-green-500 pb-2"
+                        className="text-white bg-green-600 p-2 rounded-lg"
                         onClick={() => setSelectedSemester(index)}
                       >
                         {semester}
                       </a>
                     ) : (
                       <a
-                        className="text-gray-200 hover:text-green-500 border-b-2 border-transparent hover:border-green-500 pb-2"
+                        className="text-gray-200 hover:text-green-500 border-transparent hover:border-green-500 pb-2"
                         onClick={() => setSelectedSemester(index)}
                       >
                         {semester}
@@ -107,6 +111,7 @@ export default function Page() {
                   </li>
                 ))}
               </ul>
+              </div>
             </div>
             <div className="flex-1 p-2 text-white">
               <CustomTable
@@ -139,7 +144,7 @@ export default function Page() {
       ) : (
         <>
           <NavbarLogin />
-          <h1 className="flex text-2xl font-medium items-center text-white justify-center">
+          <h1 className="flex flex-col text-2xl font-medium items-center text-white justify-center w-screen h-screen">
             Loading ...
           </h1>
           <div
@@ -151,6 +156,7 @@ export default function Page() {
           ></div>
         </>
       )}
+    </div>
     </div>
   );
 }

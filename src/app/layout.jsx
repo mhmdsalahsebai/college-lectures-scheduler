@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 
 export const metadata = {
-  title: "College Lectures Scheduler",
+  title: "Scheduly",
 };
 
 export default function RootLayout({ children }) {
