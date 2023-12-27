@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Select from "react-select";
 
 const Dropdown = ({ clearData, selectedYear }) => {
   const [subjectData, setSubjectData] = useState([]);
@@ -29,59 +30,54 @@ const Dropdown = ({ clearData, selectedYear }) => {
     fetchData();
   }, [selectedCategory]);
 
-  const handleSelectChange = (event) => {
-    setSelectedCategory(event.target.value);
+  const options = [
+    { value: "1Year_1Term", label: "1Year_1Term" },
+    { value: "1Year_2Term", label: "1Year_2Term" },
+    { value: "2Year_1Term", label: "2Year_1Term" },
+    { value: "2Year_2Term", label: "2Year_2Term" },
+    { value: "3Year_1Term", label: "3Year_1Term" },
+    { value: "3Year_2Term", label: "3Year_2Term" },
+    { value: "4Year_1Term", label: "4Year_1Term" },
+    { value: "4Year_2Term", label: "4Year_2Term" },
+    { value: "5Year_1Term", label: "5Year_1Term" },
+    { value: "5Year_2Term", label: "5Year_2Term" },
+  ];
+
+  const handleSelectChange = (selectedOption) => {
+    setSelectedCategory(selectedOption.value);
   };
 
-  const handleSelectChange2 = (event) => {
-    setSelectedSubject(event.target.value);
-  };
-
-  const generateYearOptions = () => {
-    const terms = ["1Term", "2Term"];
-    const options = [];
-
-    terms.forEach((term) => {
-      options.push(`${selectedYear}Year_${term}`);
-    });
-
-    return options;
+  const handleSelectChange2 = (selectedOption) => {
+    setselectedsubject(selectedOption.label);
   };
 
   return (
     <div>
-      <select
-        className="mt-1 w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
-        id="selectedCategory"
-        name="selectedCategory"
-        value={selectedCategory}
-        onChange={handleSelectChange}
-      >
-        <option value="">Select year and term</option>
-        {generateYearOptions().map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
+      <label>
+        Select Year and Term:
+        <Select
+          options={options}
+          value={options.find((option) => option.value === selectedCategory)}
+          onChange={handleSelectChange}
+        />
+      </label>
 
-      <input
-        className="mt-1 w-full p-2 border rounded-md focus:outline-none focus:border-blue-500"
-        list="subject"
-        id="selectedSubject"
-        placeholder="Choose a Subject"
-        name="selectedSubject"
-        value={selectedSubject}
+      <label
+        htmlFor="selectedsubject"
+        style={{ display: "block", marginTop: "10px" }}
+      >
+        Subject
+      </label>
+      <Select
+        id="selectedsubject"
+        options={subjectData.map((subject) => ({
+          value: subject["Subject code"],
+          label: subject["Subject name"],
+        }))}
+        value={options.find((option) => option.label === selectedsubject)}
         onChange={handleSelectChange2}
       />
-      <datalist id="subject">
-        {subjectData.map((subject) => (
-          <option key={subject["Subject code"]} value={subject["Subject name"]}>
-            {subject["Subject name"]}
-          </option>
-        ))}
-      </datalist>
-      </div>
+    </div>
   );
 };
 
