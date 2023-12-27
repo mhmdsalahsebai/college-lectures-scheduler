@@ -9,7 +9,7 @@ const InfoForm = ({ selectedInstructor }) => {
       setStatus("");
     }, 1000);
   }
-  const [instructorsInfo, setInstructorsInfo] = useState({
+  const [professorInfo, setProfessorInfo] = useState({
     name: "",
     email: "",
     course: [],
@@ -17,6 +17,17 @@ const InfoForm = ({ selectedInstructor }) => {
     availability: [],
     phoneNumber: "",
   });
+
+  const [taInfo, setTaInfo] = useState({
+    name: "",
+    email: "",
+    course: [],
+    courseCode: [],
+    availability: [],
+    phoneNumber: "",
+  });
+
+  const instructorsInfo = selectedInstructor === "Professor" ? professorInfo : taInfo;
 
   const daysOptions = [
     { value: "Sunday", label: "Sunday" },
@@ -27,35 +38,67 @@ const InfoForm = ({ selectedInstructor }) => {
   ];
 
 
-
+  // setInstructorsInfo
   const handleCourseCodeChange = (selectedOptions) => {
-    setInstructorsInfo((prevInfo) => ({
+    if (selectedInstructor === "Professor") {
+      setProfessorInfo((prevInfo) => ({
       ...prevInfo,
       courseCode: selectedOptions.map((option) => option.value),
       course: selectedOptions.map((option) => option.label),
     }));
+    } 
+    else {
+      setTaInfo((prevInfo) => ({
+        ...prevInfo,
+        courseCode: selectedOptions.map((option) => option.value),
+        course: selectedOptions.map((option) => option.label),
+      }));
+    }
   };
 
   const handleCourseChange = (selectedOptions) => {
-    setInstructorsInfo((prevInfo) => ({
-      ...prevInfo,
-      course: selectedOptions.map((option) => option.value),
-      courseCode: selectedOptions.map((option) => option.label),
-    }));
+    if (selectedInstructor === "Professor") {
+      setProfessorInfo((prevInfo) => ({
+        ...prevInfo,
+        course: selectedOptions.map((option) => option.value),
+        courseCode: selectedOptions.map((option) => option.label),
+      }));
+    } 
+    else {
+      setTaInfo((prevInfo) => ({
+        ...prevInfo,
+        course: selectedOptions.map((option) => option.value),
+        courseCode: selectedOptions.map((option) => option.label),
+      }));
+    }
+  
   };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     const sanitizedValue =
       name === "phoneNumber" ? value.replace(/[^0-9+]/g, "") : value;
-    setInstructorsInfo({ ...instructorsInfo, [name]: sanitizedValue });
+    if (selectedInstructor === "Professor") {
+      setProfessorInfo({ ...professorInfo, [name]: sanitizedValue });
+    } 
+    else {
+      setTaInfo({ ...taInfo, [name]: sanitizedValue });
+    }
   };
 
   const handleDaysChange = (selectedOptions) => {
-    setInstructorsInfo((prevInfo) => ({
-      ...prevInfo,
-      availability: selectedOptions.map((option) => option.value),
-    }));
+    if (selectedInstructor === "Professor") {
+      setProfessorInfo((prevInfo) => ({
+        ...prevInfo,
+        availability: selectedOptions.map((option) => option.value),
+      }));
+    } 
+    else {
+      setTaInfo((prevInfo) => ({
+        ...prevInfo,
+        availability: selectedOptions.map((option) => option.value),
+      }));
+    }
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -104,7 +147,15 @@ const InfoForm = ({ selectedInstructor }) => {
       });
 
       if (response.ok) {
-        setInstructorsInfo({
+        setProfessorInfo({
+          name: "",
+          email: "",
+          course: [],
+          courseCode: [],
+          availability: [],
+          phoneNumber: "",
+        });
+        setTaInfo({
           name: "",
           email: "",
           course: [],

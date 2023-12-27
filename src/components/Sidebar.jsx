@@ -55,7 +55,7 @@ const Sidebar = ({ setLogoutMessage }) => {
   return (
     <div
       id="side"
-      className="group h-screen pt-20 relative w-16 px-2 py-4  bg-gray-800 flex flex-col items-center transition-all duration-200 hover:w-40"
+      className="group h-screen pt-20 relative w-16 px-2 py-4  bg-gray-800 flex flex-col items-center transition-all duration-400 hover:w-40"
     >
       <div className="flex flex-col justify-between h-full">
         <div className="flex flex-col gap-2">
