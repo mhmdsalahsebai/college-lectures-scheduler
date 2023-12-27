@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
-const InstructionTable = ({api}) => {
+const InstructorsTable = ({ api }) => {
   const [tableData, setTableData] = useState([[]]);
   const [deleteStatus, setDeleteStatus] = useState(false);
   const handleDelete = async (name) => {
@@ -19,14 +19,14 @@ const InstructionTable = ({api}) => {
     } catch (error) {
       console.error("Failed to send data");
     }
-  }
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('api/' + api, {
-          method: 'GET',
+        const response = await fetch("api/" + api, {
+          method: "GET",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
         });
         const result = await response.json();
@@ -34,7 +34,7 @@ const InstructionTable = ({api}) => {
           setTableData(result.data);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
     fetchData();
@@ -53,7 +53,7 @@ const InstructionTable = ({api}) => {
   const Header_Name = [
     "Name",
     "Course",
-    "Course Code",
+    "Course Name",
     "Availability",
     "Phone Number",
     "Email",
@@ -61,7 +61,7 @@ const InstructionTable = ({api}) => {
   ];
 
   return (
-    <div className="fixed px-4 ml-6 w-11/12"   >
+    <div className="fixed px-4 ml-6 w-11/12">
       <div className="flex overflow-y-scroll max-h-[600px]">
         <table className="table-auto border-collapse border border-gray-800 w-full">
           <thead className="bg-gray-800 text-white">
@@ -84,15 +84,11 @@ const InstructionTable = ({api}) => {
                     key={index}
                     className="py-2 px-4 border border-gray-300 text-center"
                   >
-                    {Array.isArray(row[name]) ? (
-                      row[name].map((item, index) => (
-                        <div key={index}>
-                          {item}
-                        </div>
-                      ))
-                    ) : (
-                      row[name]
-                    )}
+                    {Array.isArray(row[name])
+                      ? row[name].map((item, index) => (
+                          <div key={index}>{item}</div>
+                        ))
+                      : row[name]}
                     {name === "delete" && (
                       <button
                         className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full"
@@ -112,4 +108,4 @@ const InstructionTable = ({api}) => {
   );
 };
 
-export default InstructionTable;
+export default InstructorsTable;
