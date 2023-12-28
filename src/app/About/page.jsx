@@ -66,7 +66,7 @@ const AboutPage = () => {
                 platform that revolutionizes the way academic schedules are
                 created and managed. We understand the challenges you face, and
                 we are here to make your academic journey smoother and more
-                organized.
+                organized
               </p>
             </div>
           </div>
