@@ -44,10 +44,10 @@ const AboutPage = () => {
   const projectData = [
     { name: "Mohamed Salah", imageUrl: "/Images/MS.jpg" },
     { name: "Karim Nady", imageUrl: "/Images/KN.jpg" },
-    { name: "Osama Hussein", imageUrl: "/Images/eng.png" },
-    { name: "Mazen Elnahla", imageUrl: "/Images/eng.png" },
-    { name: "Abdelrahman Fawzy", imageUrl: "/Images/eng.png" },
-    { name: "Abdallah Anwar", imageUrl: "/Images/eng.png" },
+    { name: "Osama Hussein", imageUrl: "/Images/OSA.jpg" },
+    { name: "Mazen Elnahla", imageUrl: "/Images/MZ.jpeg" },
+    { name: "Abdelrahman Fawzy", imageUrl: "/Images/tst.png" },
+    { name: "Abdallah Anwar", imageUrl: "/Images/ANW.png" },
   ];
 
   return (
