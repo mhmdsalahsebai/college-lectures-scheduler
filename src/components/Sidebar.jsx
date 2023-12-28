@@ -50,6 +50,12 @@ const Sidebar = ({ setLogoutMessage }) => {
       link: "/Settings",
       label: "Settings",
     },
+    {
+        icon: <BadgeOutlinedIcon style={{ fontSize: 24 }} />,
+        link: "/About",
+        label: "About",
+    }
+to sidebarItems in Sidebar.jsx
   ];
 
   return (
