@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import "../../styles/globals.css";
 import Navbar from "@/components/Navbar";
 import Sidebar from "@/components/Sidebar";
-
+import Image from "next/image";
 const AboutPage = () => {
   const [theme, setTheme] = useState(() => {
     return typeof window !== "undefined"
@@ -41,12 +41,12 @@ const AboutPage = () => {
   const [logoutMessage, setLogoutMessage] = useState("");
 
   const projectData = [
-    { name: "Mohamed Salah", imageUrl: "url_to_mohamed_salah_image" },
-    { name: "Karim Nady", imageUrl: "url_to_karim_nady_image" },
-    { name: "Osama Hussein", imageUrl: "url_to_osama_hussein_image" },
-    { name: "Mazen Elnahla", imageUrl: "url_to_mazen_elnahla_image" },
-    { name: "Abdelrahman Fawzy", imageUrl: "url_to_abdelrahman_fawzy_image" },
-    { name: "Abdallah Anwar", imageUrl: "url_to_abdallah_anwar_image" },
+    { name: "Mohamed Salah", imageUrl: "/Images/eng.png" },
+    { name: "Karim Nady", imageUrl: "/Images/eng.png"},
+    { name: "Osama Hussein", imageUrl: "/Images/eng.png" },
+    { name: "Mazen Elnahla", imageUrl: "/Images/eng.png" },
+    { name: "Abdelrahman Fawzy", imageUrl: "/Images/eng.png" },
+    { name: "Abdallah Anwar", imageUrl: "/Images/eng.png" },
   ];
 
   return (
@@ -77,11 +77,7 @@ const AboutPage = () => {
                 {projectData.map((project, index) => (
                   <div key={index} className="col">
                     <div className="card h-100">
-                      <img
-                        src={project.imageUrl}
-                        alt={project.name}
-                        className="card-img-top rounded-md"
-                      />
+                    <Image className="rounded-lg" src={project.imageUrl} alt={project.name} width={170} height={170} />
                       <div className="card-body">
                         <h5 className="card-title">{project.name}</h5>
                       </div>
