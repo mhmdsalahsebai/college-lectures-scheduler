@@ -41,8 +41,8 @@ const AboutPage = () => {
   const [logoutMessage, setLogoutMessage] = useState("");
 
   const projectData = [
-    { name: "Mohamed Salah", imageUrl: "/Images/eng.png" },
-    { name: "Karim Nady", imageUrl: "/Images/eng.png"},
+    { name: "Mohamed Salah", imageUrl: "/Images/MS.jpg" },
+    { name: "Karim Nady", imageUrl: "/Images/KN.jpg" },
     { name: "Osama Hussein", imageUrl: "/Images/eng.png" },
     { name: "Mazen Elnahla", imageUrl: "/Images/eng.png" },
     { name: "Abdelrahman Fawzy", imageUrl: "/Images/eng.png" },
@@ -77,7 +77,14 @@ const AboutPage = () => {
                 {projectData.map((project, index) => (
                   <div key={index} className="col">
                     <div className="card h-100">
-                    <Image className="rounded-lg" src={project.imageUrl} alt={project.name} width={170} height={170} />
+                      <div className="overflow-hidden rounded-full w-32 h-32 mx-auto">
+                        <Image
+                          src={project.imageUrl}
+                          alt={project.name}
+                          width={170}
+                          height={170}
+                        />
+                      </div>{" "}
                       <div className="card-body">
                         <h5 className="card-title">{project.name}</h5>
                       </div>

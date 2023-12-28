@@ -3,7 +3,8 @@ import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import BadgeOutlinedIcon from "@mui/icons-material/BadgeOutlined";
 import SettingsIcon from "@mui/icons-material/Settings";
-import ExitToAppIcon from "@mui/icons-material/ExitToApp"; // Import the ExitToAppIcon
+import ExitToAppIcon from "@mui/icons-material/ExitToApp";
+import InfoIcon from '@mui/icons-material/Info'; 
 import Link from "next/link";
 
 const Sidebar = ({ setLogoutMessage }) => {
@@ -51,11 +52,10 @@ const Sidebar = ({ setLogoutMessage }) => {
       label: "Settings",
     },
     {
-        icon: <BadgeOutlinedIcon style={{ fontSize: 24 }} />,
-        link: "/About",
-        label: "About",
-    }
-to sidebarItems in Sidebar.jsx
+      icon: <InfoIcon style={{ fontSize: 24 }} />,
+      link: "/About",
+      label: "About",
+    },
   ];
 
   return (
@@ -69,7 +69,7 @@ to sidebarItems in Sidebar.jsx
             <div
               key={index}
               className="flex items-center rounded-lg transition-all p-2 duration-300 text-white mb-4 cursor-pointer hover:scale-105 group-hover:bg-gray-700 "
-              onClick={item.handleClick || (() => { })}
+              onClick={item.handleClick || (() => {})}
             >
               <Link href={item.link}>
                 <span className="mr-1">{item.icon}</span>
